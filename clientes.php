@@ -66,7 +66,7 @@ include("seguridad.php");
                     <table>
                         <tr id="campos">
                             <th>DNI</th>
-                            <th>Nombre <br><a href="clientesASC.php">ASC</a> <a href="clientesDESC.php">DESC</a></th>
+                            <th>Nombre <br><a href="clientesAsc.php">ASC</a> <a href="clientesDesc.php">DESC</a></th>
                             <th>Apellidos</th>
                             <th>Dirección</th>
                             <th>Localidad</th>

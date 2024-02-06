@@ -635,6 +635,7 @@ footer p {
     text-align: center;
     background-color: var(--amarillo);
     width: 100%;
+    border-radius: 2px;
 }
 
 .enlaces-user a:hover {
@@ -703,3 +704,67 @@ table img {
 .editarUser {
     
 }
+
+/** MENU ARTICULOS Y CATEGORIAS **/
+
+.menu-articulos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    border-left: 1px solid var(--oscuro);
+    height: 100%;
+}
+
+.menu-categorias {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    border-left: 1px solid var(--oscuro);
+    height: 100%;
+    padding-top: 50px;
+}
+
+.menu-articulos a {
+    background-color: var(--amarillo);
+    color: var(--negro);
+    text-decoration: none;
+    padding: 65px;
+    width: 80%;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    text-transform: uppercase;
+    border-radius: 4px;
+}
+
+
+.menu-categorias a {
+    padding: 100px;
+    background-color: var(--amarillo);
+    color: var(--negro);
+    text-decoration: none;
+    width: 80%;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    text-transform: uppercase;
+    border-radius: 4px;
+}
+
+.menu-articulos a:hover {
+    cursor: pointer;
+    background-color: var(--negro);
+    color: var(--amarillo);
+}
+
+.menu-categorias a:hover {
+    cursor: pointer;
+    background-color: var(--negro);
+    color: var(--amarillo);
+}
+
+

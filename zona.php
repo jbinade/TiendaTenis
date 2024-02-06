@@ -47,8 +47,8 @@
                 <div class="form-login enlaces-user">
                     <a href="clientes.php">Clientes</a>
                     <a href="empleados.php">Empleados</a>
-                    <a href="">Categorías</a>
-                    <a href="">Artículos</a>
+                    <a href="menucategorias.php">Categorías</a>
+                    <a href="menuarticulos.php">Artículos</a>
                     <a href="">Pedidos</a>
                     <a href="resetpassword.php">Actualizar Contraseña</a>
                     <a href="salir.php">Cerrar Sesión</a>
@@ -69,8 +69,8 @@
 
                 <div class="form-login enlaces-user">
                     <a href="clientes.php">Clientes</a>
-                    <a href="">Categorías</a>
-                    <a href="">Artículos</a>
+                    <a href="menucategorias.php">Categorías</a>
+                    <a href="menuarticulos.php">Artículos</a>
                     <a href="">Pedidos</a>
                     <a href="resetpassword.php">Actualizar Contraseña</a>
                     <a href="salir.php">Cerrar Sesión</a>
