@@ -532,6 +532,11 @@ footer p {
     flex-direction: row;
 }
 
+.campo-desplegable {
+    display: flex;
+    flex-direction: column;
+}
+
 .campo-email {
     width: 350px;
 }
@@ -579,6 +584,11 @@ footer p {
 .dni-empleado {
     margin-right: 100px;
     margin-bottom: 20px;
+}
+
+.opcion-desplegable {
+    width: 200px;
+    margin-bottom: 30px;
 }
 
 .botones-form {

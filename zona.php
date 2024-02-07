@@ -53,6 +53,20 @@
                     <a href="resetpassword.php">Actualizar Contraseña</a>
                     <a href="salir.php">Cerrar Sesión</a>
                 </div>
+
+                <?php
+                if (isset($_GET['articulo']) && $_GET['articulo'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Artículo añadido correctamente</p>';
+                }
+
+                if (isset($_GET['articuloactualizado']) && $_GET['articuloactualizado'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Artículo actualizado correctamente</p>';
+                }
+
+                if (isset($_GET['empleado']) && $_GET['empleado'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Empleado añadido correctamente</p>';
+                }
+                ?>
             </div>
         </aside>
      
@@ -75,7 +89,18 @@
                     <a href="resetpassword.php">Actualizar Contraseña</a>
                     <a href="salir.php">Cerrar Sesión</a>
                 </div>
+                <?php
+                if (isset($_GET['articulo']) && $_GET['articulo'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Artículo añadido correctamente</p>';
+                }
+
+                if (isset($_GET['articuloactualizado']) && $_GET['articuloactualizado'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Artículo actualizado correctamente</p>';
+                }
+                ?>
             </div>
+
+
         </aside>
 
 

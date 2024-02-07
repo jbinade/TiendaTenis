@@ -330,7 +330,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                     $stmt->execute();
 
-                    header("Location: empleados.php");
+                    header("Location: index.php?empleado=OK");
         
                 } catch(PDOException $e) {
                     echo 'Error al insertar el empleado: ' . $e->getMessage();

@@ -59,7 +59,7 @@ include("seguridad.php");
 
                 <div class="menu-articulos">
                     <a href="listadoarticulos.php">Listado Artículos</a>
-                    <a href="articulosinactivos.php">Artículos Inactivos</a>
+                    <a href="listarticulosinact.php">Artículos Inactivos</a>
                     <a href="nuevoarticulo.php">Nuevo Artículo</a>
                 </div>
     
