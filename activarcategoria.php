@@ -2,6 +2,41 @@
 
 include("seguridad.php");
 
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    if(isset($_REQUEST["codigo"])) {
+        $codigo = $_REQUEST["codigo"];
+    }
+
+    try {
+
+        include("conectar_db.php");
+        $con = new Conexion();
+        $conexion = $con->conectar_db();
+        $stmt = $conexion->prepare('UPDATE categorias SET activo = 1 WHERE codigo = :codigo');
+        $stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
+        $stmt->execute();
+
+        header("Location: categorias.php?categoriaActivada=OK");
+        
+    } catch(PDOException $e) {
+            echo 'Error al activar la categoria: ' . $e->getMessage();
+    }
+        
+      
+}
+
+?>
+
+
+<?php
+if(isset($_REQUEST["codigo"])) {
+    $codigo = $_REQUEST["codigo"];
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -57,11 +92,20 @@ include("seguridad.php");
 
             <main class="contenido-principal">
 
-                <div class="menu-articulos">
-                    <a href="listadoarticulos.php">Listado Artículos</a>
-                    <a href="listarticulosinact.php">Artículos Inactivos</a>
-                    <a href="nuevoarticulo.php">Nuevo Artículo</a>
-                </div>
+                <form class="formulario" action="activarcategoria.php?codigo=<?php echo $codigo; ?>" method="post">
+
+                    <h2>Activar Categoría</h2>
+
+                    <div class="form-campos form-cambio-contraseña">
+
+                        <label for="contraseña">¿Deseas activar esta categoría?</label> 
+
+                        <div class="botones-form">
+                            <button class="btn-registro" type="submit">Activar</button>
+                            <a class="btn-registro" href="index.php">Cancelar</a>
+                        </div>
+                    </div>
+                </form>    
     
             </main>
 

@@ -2,6 +2,49 @@
 
 include("seguridad.php");
 
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    if(isset($_REQUEST["codigo"])) {
+        $codigo = $_REQUEST["codigo"];
+    }
+
+    try {
+
+        include("conectar_db.php");
+        $con = new Conexion();
+        $conexion = $con->conectar_db();
+        $stmt = $conexion->prepare('UPDATE categorias SET activo = 0 WHERE codigo = :codigo');
+        $stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $stmtSubcategoria = $conexion->prepare('UPDATE categorias SET activo = 0 WHERE codcategoriapadre = :codcategoriapadre');
+        $stmtSubcategoria->bindParam(':codcategoriapadre', $codigo, PDO::PARAM_STR);
+        $stmtSubcategoria->execute();
+
+        $stmtArticulos = $conexion->prepare('UPDATE articulos SET activo = 0 WHERE categoria IN (SELECT codigo FROM categorias WHERE codcategoriapadre = :codcategoriapadre)');
+        $stmtArticulos->bindParam(':codcategoriapadre', $codigo, PDO::PARAM_STR);
+        $stmtArticulos->execute();
+
+        header("Location: categorias.php?categoriaeliminada=OK");
+        
+    } catch(PDOException $e) {
+            echo 'Error al eliminar el articulo: ' . $e->getMessage();
+    }
+        
+      
+}
+
+?>
+
+
+<?php
+if(isset($_REQUEST["codigo"])) {
+    $codigo = $_REQUEST["codigo"];
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -57,11 +100,20 @@ include("seguridad.php");
 
             <main class="contenido-principal">
 
-                <div class="menu-articulos">
-                    <a href="listadoarticulos.php">Listado Artículos</a>
-                    <a href="listarticulosinact.php">Artículos Inactivos</a>
-                    <a href="nuevoarticulo.php">Nuevo Artículo</a>
-                </div>
+                <form class="formulario" action="borrarcategoria.php?codigo=<?php echo $codigo; ?>" method="post">
+
+                    <h2>Eliminar Categoría</h2>
+
+                    <div class="form-campos form-cambio-contraseña">
+
+                        <label for="">¿Deseas eliminar esta categoría?</label> 
+
+                        <div class="botones-form">
+                            <button class="btn-registro" type="submit">Eliminar</button>
+                            <a class="btn-registro" href="index.php">Cancelar</a>
+                        </div>
+                    </div>
+                </form>    
     
             </main>
 

@@ -74,11 +74,27 @@
                 if (isset($_GET['articuloactivado']) && $_GET['articuloactivado'] == 'OK') {
                     echo '<p class="mensaje-contraseña">Artículo activado correctamente</p>';
                 }
+
+                if (isset($_GET['categoria']) && $_GET['categoria'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Categoría añadida correctamente</p>';
+                }
+
+                if (isset($_GET['categoriaActualizada']) && $_GET['categoriaActualizada'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Categoría añadida correctamente</p>';
+                }
+
+                if (isset($_GET['categoriaeliminada']) && $_GET['categoriaeliminada'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Categoría eliminada correctamente</p>';
+                }
+
+                if (isset($_GET['categoriaActivada']) && $_GET['categoriaActivada'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Categoría activada correctamente</p>';
+                }
                 ?>
             </div>
         </aside>
      
-
+        
 <?php
 
     } else {
@@ -112,6 +128,22 @@
 
                 if (isset($_GET['articuloactivado']) && $_GET['articuloactivado'] == 'OK') {
                     echo '<p class="mensaje-contraseña">Artículo activado correctamente</p>';
+                }
+
+                if (isset($_GET['categoria']) && $_GET['categoria'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Categoría añadida correctamente</p>';
+                }
+
+                if (isset($_GET['categoriaActualizada']) && $_GET['categoriaActualizada'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Categoría añadida correctamente</p>';
+                }
+
+                if (isset($_GET['categoriaeliminada']) && $_GET['categoriaeliminada'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Categoría eliminada correctamente</p>';
+                }
+
+                if (isset($_GET['categoriaActivada']) && $_GET['categoriaActivada'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Categoría activada correctamente</p>';
                 }
                 ?>
             </div>

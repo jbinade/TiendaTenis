@@ -39,7 +39,7 @@
                             $con = new Conexion();
                             $conexion = $con->conectar_db();
                             // Realizar la consulta para obtener las categorías principales
-                            $stmtCategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre IS NULL");
+                            $stmtCategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre IS NULL AND activo = 1");
                             $stmtCategorias->execute();
 
                             // Iterar sobre las categorías principales
@@ -49,7 +49,7 @@
                                 echo '<ul class="enlaces-desplegable" id="' . $categoria['nombre'] . '-menu">';
 
                                 // Realizar la consulta para obtener las subcategorías de esta categoría principal
-                                $stmtSubcategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre = :codcategoriapadre");
+                                $stmtSubcategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre = :codcategoriapadre AND activo = 1");
                                 $stmtSubcategorias->bindParam(':codcategoriapadre', $categoria['codigo'], PDO::PARAM_INT);
                                 $stmtSubcategorias->execute();
 
@@ -153,7 +153,7 @@
                             $con = new Conexion();
                             $conexion = $con->conectar_db();
                             // Realizar la consulta para obtener las categorías principales
-                            $stmtCategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre IS NULL");
+                            $stmtCategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre IS NULL AND activo = 1");
                             $stmtCategorias->execute();
 
                             // Iterar sobre las categorías principales
@@ -163,7 +163,7 @@
                                 echo '<ul class="enlaces-desplegable" id="' . $categoria['nombre'] . '-menu">';
 
                                 // Realizar la consulta para obtener las subcategorías de esta categoría principal
-                                $stmtSubcategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre = :codcategoriapadre");
+                                $stmtSubcategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre = :codcategoriapadre AND activo = 1");
                                 $stmtSubcategorias->bindParam(':codcategoriapadre', $categoria['codigo'], PDO::PARAM_INT);
                                 $stmtSubcategorias->execute();
 

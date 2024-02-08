@@ -61,47 +61,44 @@ include("seguridad.php");
 
                 <div class="tabla">
 
-                    <h3>Mi Cuenta</h3> 
+                    <h3>Listado Artículos</h3> 
 
                     <table>
                         <tr id="campos">
-                            <th>DNI</th>
+                            <th>Código</th>
                             <th>Nombre</th>
-                            <th>Apellidos</th>
-                            <th>Dirección</th>
-                            <th>Localidad</th>
-                            <th>Provincia</th>
-                            <th>Teléfono</th>
-                            <th>Email</th>
-                            <th class="editarUser">Editar</th>
-                            <th class="borrarUser">Borrar</th>
+                            <th class="editarUser">Activar</th>
                         </tr>
 
 <?php
 
                         try {
 
+                            //Limito la búsqueda de cada página
+                            $PAGS = 8;
+
+                            //inicializamos la página y el inicio para el límite de SQL
+                            $pagina = isset($_GET["pagina"]) ? $_GET["pagina"] : 1;
+                            $inicio = ($pagina - 1) * $PAGS;
+
                             $con = new Conexion();
                             $conexion = $con->conectar_db();
-                            $dni = $_SESSION["dni"];
 
-                            $stmt = $conexion->prepare("SELECT * FROM clientes WHERE dni = :dni");
-                            $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+                            $stmt = $conexion->prepare("SELECT * FROM categorias");
                             $stmt->execute();
-                            $res = $stmt->fetch(PDO::FETCH_OBJ);
+                            //contar los registros y las páginas con la división entera
+                            $num_total_registros = $stmt->rowCount();
+                            $total_paginas = ceil($num_total_registros / $PAGS);
 
-                            if ($res) {
+                            $stmt = $conexion->prepare("SELECT * FROM categorias WHERE activo = 0 AND codcategoriapadre IS NULL LIMIT ".$inicio."," .$PAGS);
+                            $stmt->execute();
+                            
+                            while ($res = $stmt->fetch(PDO::FETCH_OBJ)) {
                                 echo "<tr>";
-                                echo "<td>" . $res->dni . "</td>";
+                                echo "<td>" . $res->codigo . "</td>";
                                 echo "<td>" . $res->nombre . "</td>";
-                                echo "<td>" . $res->apellidos . "</td>";
-                                echo "<td>" . $res->direccion . "</td>";
-                                echo "<td>" . $res->localidad . "</td>";
-                                echo "<td>" . $res->provincia . "</td>";
-                                echo "<td>" . $res->telefono . "</td>";
-                                echo "<td>" . $res->email . "</td>";
-                                echo "<td><a href='editarmiCuenta.php?dni=" . $res->dni . "'><img src='./images/editar.png' alt='Editar'></a></td>";
-                                echo "<td><a href='borrarmiCuenta.php?dni=" . $res->dni . "'><img src='./images/borrar.jpg' alt='Borrar'></a></td>";
+                                echo "<td><a href='activarcategoria.php?codigo=" . $res->codigo . "'><img src='./images/editar.png' alt='Editar'></a></td>";
+                                echo "</tr>";
                                 echo "</tr>";
                             }
                     echo "</table>";
@@ -112,7 +109,30 @@ include("seguridad.php");
                         }
 
 ?>
+                    <div class="botones-form">
+                        <a class="btn-registro" href="menuarticulos.php">Cancelar</a>
+                    </div>
                 </div>
+
+                <div class="paginas">
+
+<?php
+
+                    if ($total_paginas > 1) {
+                        for ($i = 1; $i <= $total_paginas; $i++) {
+                            if ($pagina == $i) {
+                                // Si muestro el índice de la página actual, no coloco enlace
+                                echo $pagina . " ";
+                            } else {
+                                // Si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página
+                                echo "<a href='listcategoriasinact.php?pagina=$i'>$i</a> ";
+                            }
+                        }
+                    }
+
+?>
+      
+                </div>    
 
             </div>
 
@@ -126,4 +146,4 @@ include("seguridad.php");
 
     <script src="js.js"></script>
 </body>
-</html>                                   
+</html>                               

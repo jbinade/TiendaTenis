@@ -26,7 +26,7 @@ include("seguridad.php");
                             $con = new Conexion();
                             $conexion = $con->conectar_db();
                             // Realizar la consulta para obtener las categorías principales
-                            $stmtCategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre IS NULL");
+                            $stmtCategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre IS NULL AND activo = 1");
                             $stmtCategorias->execute();
 
                             // Iterar sobre las categorías principales
@@ -36,7 +36,7 @@ include("seguridad.php");
                                 echo '<ul class="enlaces-desplegable" id="' . $categoria['nombre'] . '-menu">';
 
                                 // Realizar la consulta para obtener las subcategorías de esta categoría principal
-                                $stmtSubcategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre = :codcategoriapadre");
+                                $stmtSubcategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre = :codcategoriapadre AND activo = 1");
                                 $stmtSubcategorias->bindParam(':codcategoriapadre', $categoria['codigo'], PDO::PARAM_INT);
                                 $stmtSubcategorias->execute();
 
@@ -58,9 +58,9 @@ include("seguridad.php");
             <main class="contenido-principal">
 
                 <div class="menu-articulos">
-                    <a href="listadoarticulos.php">Listado Categorías</a>
-                    <a href="articulosinactivos.php">Categorías Inactivas</a>
-                    <a href="nuevoarticulo.php">Nueva Categoría</a>
+                    <a href="listadocategorias.php">Listado Categorías</a>
+                    <a href="listcategoriasinact.php">Categorías Inactivas</a>
+                    <a href="nuevacategoria.php">Nueva Categoría</a>
                 </div>
     
             </main>
