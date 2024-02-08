@@ -66,6 +66,14 @@
                 if (isset($_GET['empleado']) && $_GET['empleado'] == 'OK') {
                     echo '<p class="mensaje-contraseña">Empleado añadido correctamente</p>';
                 }
+
+                if (isset($_GET['articuloeliminado']) && $_GET['articuloeliminado'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Artículo eliminado correctamente</p>';
+                }
+
+                if (isset($_GET['articuloactivado']) && $_GET['articuloactivado'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Artículo activado correctamente</p>';
+                }
                 ?>
             </div>
         </aside>
@@ -96,6 +104,14 @@
 
                 if (isset($_GET['articuloactualizado']) && $_GET['articuloactualizado'] == 'OK') {
                     echo '<p class="mensaje-contraseña">Artículo actualizado correctamente</p>';
+                }
+
+                if (isset($_GET['articuloeliminado']) && $_GET['articuloeliminado'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Artículo eliminado correctamente</p>';
+                }
+
+                if (isset($_GET['articuloactivado']) && $_GET['articuloactivado'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Artículo activado correctamente</p>';
                 }
                 ?>
             </div>

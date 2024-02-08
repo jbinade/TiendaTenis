@@ -103,7 +103,7 @@ include("seguridad.php");
                                 echo "<td>" . $res->categoria . "</td>";
                                 echo "<td>" . $res->precio . "€</td>";
                                 echo "<td>" . $res->preciodest . "€</td>";
-                                echo "<td><a href='activararticulo.php?dni=" . $res->codigo . "'><img src='./images/editar.png' alt='Editar'></a></td>";
+                                echo "<td><a href='activararticulo.php?codigo=" . $res->codigo . "'><img src='./images/editar.png' alt='Editar'></a></td>";
                                 echo "</tr>";
                                 echo "</tr>";
                             }
