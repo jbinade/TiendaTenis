@@ -61,7 +61,7 @@ include("seguridad.php");
 
                 <div class="tabla">
 
-                    <h3>Listado Artículos</h3> 
+                    <h3>Categorías Inactivas</h3> 
 
                     <table>
                         <tr id="campos">

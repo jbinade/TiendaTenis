@@ -2,6 +2,45 @@
 
 include("seguridad.php");
 
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    if(isset($_REQUEST["codigo"])) {
+        $codigo = $_REQUEST["codigo"];
+    }
+
+    try {
+
+        include("conectar_db.php");
+        $con = new Conexion();
+        $conexion = $con->conectar_db();
+        $stmt = $conexion->prepare('UPDATE categorias SET activo = 0 WHERE codigo = :codigo');
+        $stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $stmtArticulos = $conexion->prepare('UPDATE articulos SET activo = 0 WHERE categoria = :categoria');
+        $stmtArticulos->bindParam(':categoria', $codigo, PDO::PARAM_STR);
+        $stmtArticulos->execute();
+
+        header("Location: subcategorias.php?subcategoriaeliminada=OK");
+        
+    } catch(PDOException $e) {
+            echo 'Error al eliminar la subcategoria: ' . $e->getMessage();
+    }
+        
+      
+}
+
+?>
+
+
+<?php
+if(isset($_REQUEST["codigo"])) {
+    $codigo = $_REQUEST["codigo"];
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -57,11 +96,20 @@ include("seguridad.php");
 
             <main class="contenido-principal">
 
-                <div class="menu-articulos">
-                    <a href="listadosubcategorias.php">Listado Subcategorías</a>
-                    <a href="listsubcategoriasinact.php">Subcategorías Inactivas</a>
-                    <a href="nuevasubcategoria.php">Nueva Subcategoría</a>
-                </div>
+                <form class="formulario" action="borrarsubcategoria.php?codigo=<?php echo $codigo; ?>" method="post">
+
+                    <h2>Eliminar Subcategoría</h2>
+
+                    <div class="form-campos form-cambio-contraseña">
+
+                        <label for="">¿Deseas eliminar esta subcategoría?</label> 
+
+                        <div class="botones-form">
+                            <button class="btn-registro" type="submit">Eliminar</button>
+                            <a class="btn-registro" href="index.php">Cancelar</a>
+                        </div>
+                    </div>
+                </form>    
     
             </main>
 
