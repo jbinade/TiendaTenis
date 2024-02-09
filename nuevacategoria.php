@@ -140,7 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                     $stmt->execute();
 
-                    header("Location: index.php?categoria=OK");
+                    header("Location: categorias.php?categoria=OK");
         
                 } catch(PDOException $e) {
                     echo 'Error al insertar la categoria: ' . $e->getMessage();

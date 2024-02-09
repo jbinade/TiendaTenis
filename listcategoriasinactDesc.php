@@ -61,17 +61,16 @@ include("seguridad.php");
 
                 <div class="tabla">
 
-                    <h3>Subcategorías Inactivas</h3> 
+                    <h3>Categorías Inactivas</h3> 
 
                     <table>
                         <tr id="campos">
                             <th>Código</th>
-                            <th>Nombre <br><a href="listsubcategoriasinactAsc.php">ASC</a> <a href="listsubcategoriasinactDesc.php">DESC</a></th>
-                            <th class="editarUser">Editar</th>
+                            <th><a href="listcategoriasinact.php">Nombre</a><br>Ord. DESC</th>
+                            <th class="editarUser">Activar</th>
                         </tr>
 
 <?php
-
 
                         try {
 
@@ -85,20 +84,20 @@ include("seguridad.php");
                             $con = new Conexion();
                             $conexion = $con->conectar_db();
 
-                            $stmt = $conexion->prepare("SELECT * FROM categorias");
+                            $stmt = $conexion->prepare("SELECT * FROM categorias ORDER BY nombre DESC");
                             $stmt->execute();
                             //contar los registros y las páginas con la división entera
                             $num_total_registros = $stmt->rowCount();
                             $total_paginas = ceil($num_total_registros / $PAGS);
 
-                            $stmt = $conexion->prepare("SELECT * FROM categorias WHERE activo = 0 AND codcategoriapadre IS NOT NULL LIMIT ".$inicio."," .$PAGS);
+                            $stmt = $conexion->prepare("SELECT * FROM categorias WHERE activo = 0 AND codcategoriapadre IS NULL ORDER BY nombre DESC LIMIT ".$inicio."," .$PAGS);
                             $stmt->execute();
                             
                             while ($res = $stmt->fetch(PDO::FETCH_OBJ)) {
                                 echo "<tr>";
                                 echo "<td>" . $res->codigo . "</td>";
                                 echo "<td>" . $res->nombre . "</td>";
-                                echo "<td><a href='activarsubcategoria.php?codigo=" . $res->codigo . "'><img src='./images/editar.png' alt='Editar'></a></td>";
+                                echo "<td><a href='activarcategoria.php?codigo=" . $res->codigo . "'><img src='./images/editar.png' alt='Editar'></a></td>";
                                 echo "</tr>";
                                 echo "</tr>";
                             }
@@ -111,7 +110,7 @@ include("seguridad.php");
 
 ?>
                     <div class="botones-form">
-                        <a class="btn-registro" href="categorias.php">Cancelar</a>
+                        <a class="btn-registro" href="menuarticulos.php">Cancelar</a>
                     </div>
                 </div>
 
@@ -126,7 +125,7 @@ include("seguridad.php");
                                 echo $pagina . " ";
                             } else {
                                 // Si el índice no corresponde con la página mostrada actualmente, coloco el enlace para ir a esa página
-                                echo "<a href='listsubcategoriasinact.php?pagina=$i'>$i</a> ";
+                                echo "<a href='listcategoriasinactDesc.php?pagina=$i'>$i</a> ";
                             }
                         }
                     }

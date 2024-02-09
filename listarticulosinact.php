@@ -66,7 +66,7 @@ include("seguridad.php");
                     <table>
                         <tr id="campos">
                             <th>Código</th>
-                            <th>Nombre</th>
+                            <th>Nombre <br><a href="listarticulosinactAsc.php">ASC</a> <a href="listarticulosinactDesc.php">DESC</a></th>
                             <th>Categoría</th>
                             <th>Precio</th>
                             <th>Precio Descuento</th>

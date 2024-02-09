@@ -91,6 +91,14 @@
                     echo '<p class="mensaje-contraseña">Categoría activada correctamente</p>';
                 }
 
+                if (isset($_GET['subcategoria']) && $_GET['subcategoria'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Categoría añadida correctamente</p>';
+                }
+
+                if (isset($_GET['subcategoriaActualizada']) && $_GET['subcategoriaActualizada'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Subategoría actualizada correctamente</p>';
+                }
+                
                 if (isset($_GET['subcategoriaActivada']) && $_GET['subcategoriaActivada'] == 'OK') {
                     echo '<p class="mensaje-contraseña">Subcategoría activada correctamente</p>';
                 }
@@ -152,6 +160,14 @@
 
                 if (isset($_GET['categoriaActivada']) && $_GET['categoriaActivada'] == 'OK') {
                     echo '<p class="mensaje-contraseña">Categoría activada correctamente</p>';
+                }
+
+                if (isset($_GET['subcategoria']) && $_GET['subcategoria'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Subcategoría añadida correctamente</p>';
+                }
+
+                if (isset($_GET['subcategoriaActualizada']) && $_GET['subcategoriaActualizada'] == 'OK') {
+                    echo '<p class="mensaje-contraseña">Subategoría actualizada correctamente</p>';
                 }
 
                 if (isset($_GET['subcategoriaActivada']) && $_GET['subcategoriaActivada'] == 'OK') {

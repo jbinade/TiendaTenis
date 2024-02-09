@@ -7,13 +7,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $con = new Conexion();
 
-    $codigo = $_REQUEST["codigo"];
     $nombre = $_REQUEST["nombre"];
+    $categoriaPadre = $_REQUEST["categoria"];
+    $activo = 1;
 
     $fallos = array();
   
     if (empty($nombre)) {
-        $fallos["nombre"] = "El nombre de la categoría es obligatorio";
+        $fallos["nombre"] = "El nombre de la subcategoría es obligatorio";
+
+    }
+
+    if (empty($categoriaPadre)) {
+        $fallos["categoria"] = "La categoria del artículo es obligatoria";
     }
 
     try {
@@ -23,16 +29,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
         $stmt->execute();
 
-        $nombreCategoria = $stmt->fetch(PDO::FETCH_ASSOC);
+        $nombreSubcategoria = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($nombreCategoria) {
-                $fallos["nombre"] = "Esta categoría ya se encuentra en la base de datos";
+        if ($nombreSubcategoria) {
+                $fallos["nombre"] = "Esta subcategoría ya se encuentra en la base de datos";
         }
         
 
     } catch(PDOException $e) {
             echo 'Error al insertar el nombre: ' . $e->getMessage();
     }
+
 
 
     //si hay fallos al introducir el fomulario se vuelve a mostrar indicando el error en color rojo
@@ -90,16 +97,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </aside>
    
                 <main class="contenido-principal">
-                    <form class="formulario" action="editarcategoria.php" method="post">
+                    <form class="formulario" action="nuevasubcategoria.php" method="post">
 
-                        <h3>Editar Categoría</h3>
+                        <h3>Nueva Subcategoría</h3>
                         
                         <div class="form-campos form-cambio-contraseña">
 
-                            <input type="hidden" name="codigo" id="codigo" value="<?php echo $codigo; ?>">
+                            <label for="categoria">Categoria</label>
+                            <select class="opcion-desplegable" name="categoria" id="categoria">
+                                <option value="">Selecciona una categoría</option>
+                                <?php
+                                $conexion = $con->conectar_db();
+                                $stmtCategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre IS NULL AND activo = 1");
+                                $stmtCategorias->execute();
+
+                                while ($categoria = $stmtCategorias->fetch(PDO::FETCH_ASSOC)) {
+                                     echo '<option value="' . $categoria["codigo"] . '">' . $categoria["nombre"] . '</option>';
+                                }
+                                ?>
+                                <?php
+                                if (isset($fallos["categoria"])) { 
+                                    echo "<span style='color: red;'>". $fallos["categoria"]."</span>"; 
+                                } 
+                                ?>
+                            </select>
 
                             <label for="nombre">Nombre</label>
-                            <input class="campo nueva-contraseña" type="text" name="nombre" id="nombre" value="<?php echo $nombre;?>" pattern="[A-Za-z]+" title="Solo se permiten letras" required> 
+                            <input class="campo nueva-contraseña" type="text" name="nombre" id="nombre" pattern="[A-Za-z]+" title="Solo se permiten letras" required> 
                             <?php 
                             if (isset($fallos["nombre"])) { 
                                 echo "<span style='color: red;'>".$fallos["nombre"]."</span>"; 
@@ -132,17 +156,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 try {
         
                     $conexion = $con->conectar_db();
-                    $stmt = $conexion->prepare('UPDATE categorias SET nombre = :nombre WHERE codigo = :codigo');
+                    $stmt = $conexion->prepare(
+                        'INSERT INTO categorias (nombre, activo, codcategoriapadre) VALUES (:nombre, :activo, :codcategoriapadre)');
         
                         $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
-                        $stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
+                        $stmt->bindParam(':activo', $activo, PDO::PARAM_STR);
+                        $stmt->bindParam(':codcategoriapadre', $categoriaPadre, PDO::PARAM_STR);
                         
                     $stmt->execute();
 
-                    header("Location: categorias.php?categoriaActualizada=OK");
+                    header("Location: subcategorias.php?subcategoria=OK");
         
                 } catch(PDOException $e) {
-                    echo 'Error al editar la categoria: ' . $e->getMessage();
+                    echo 'Error al insertar la subcategoria: ' . $e->getMessage();
                 }
         
             
@@ -152,23 +178,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 
-<?php
-
-include("conectar_db.php");
-
-if(isset($_REQUEST["codigo"])) {
-    $codigo = $_REQUEST["codigo"];
-
-}
-
-$con = new Conexion();
-$conexion = $con->conectar_db();
-$stmt = $conexion->prepare('SELECT * FROM categorias WHERE codigo = :codigo');
-$stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
-$stmt->execute();
-
-$res = $stmt->fetch(PDO::FETCH_OBJ);
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -179,7 +188,7 @@ $res = $stmt->fetch(PDO::FETCH_OBJ);
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    
+    <?php include("conectar_db.php");?>
     <?php include("header.php");?>
     
     <div class="contenedor">
@@ -223,16 +232,28 @@ $res = $stmt->fetch(PDO::FETCH_OBJ);
 
         <main class="contenido-principal">
             
-            <form class="formulario" action="editarcategoria.php" method="post">
+            <form class="formulario" action="nuevasubcategoria.php" method="post">
 
-                <h3>Editar Categoría</h3>
+                <h3>Nueva Subcategoría</h3>
 
                 <div class="form-campos form-cambio-contraseña">
 
-                    <input type="hidden" name="codigo" id="codigo" value="<?php echo $res->codigo; ?>">
-                
+                    <label for="categoria">Categoria</label>
+                        <select class="opcion-desplegable" name="categoria" id="categoria">
+                            <option value="">Selecciona una categoría</option>
+                            <?php
+                            $conexion = $con->conectar_db();
+                            $stmtCategorias = $conexion->prepare("SELECT * FROM categorias WHERE activo = 1 AND codcategoriapadre IS NULL");
+                            $stmtCategorias->execute();
+
+                            while ($categoria = $stmtCategorias->fetch(PDO::FETCH_ASSOC)) {
+                                echo '<option value="' . $categoria["codigo"] . '">' . $categoria["nombre"] . '</option>';
+                            }
+                            ?>
+                        </select>
+
                     <label for="nombre">Nombre</label>
-                    <input class="campo nueva-contraseña" type="text" name="nombre" id="nombre" value="<?php echo $res->nombre; ?>" pattern="[A-Za-z]+" title="Solo se permiten letras" required> 
+                    <input class="campo nueva-contraseña" type="text" name="nombre" id="nombre" required> 
                         
                     <div class="botones-form dni-empleado">
                         <button class="btn-registro" type="submit">Enviar</button>

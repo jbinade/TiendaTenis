@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fallos = array();
   
     if (empty($nombre)) {
-        $fallos["nombre"] = "El nombre de la categoría es obligatorio";
+        $fallos["nombre"] = "El nombre de la subcategoría es obligatorio";
     }
 
     try {
@@ -23,9 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
         $stmt->execute();
 
-        $nombreCategoria = $stmt->fetch(PDO::FETCH_ASSOC);
+        $nombreSubcategoria = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($nombreCategoria) {
+        if ($nombreSubcategoria) {
                 $fallos["nombre"] = "Esta categoría ya se encuentra en la base de datos";
         }
         
@@ -90,16 +90,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </aside>
    
                 <main class="contenido-principal">
-                    <form class="formulario" action="editarcategoria.php" method="post">
+                    <form class="formulario" action="editarsubcategoria.php" method="post">
 
-                        <h3>Editar Categoría</h3>
+                        <h3>Editar Subcategoría</h3>
                         
                         <div class="form-campos form-cambio-contraseña">
 
                             <input type="hidden" name="codigo" id="codigo" value="<?php echo $codigo; ?>">
 
                             <label for="nombre">Nombre</label>
-                            <input class="campo nueva-contraseña" type="text" name="nombre" id="nombre" value="<?php echo $nombre;?>" pattern="[A-Za-z]+" title="Solo se permiten letras" required> 
+                            <input class="campo nueva-contraseña" type="text" name="nombre" id="nombre" value="<?php echo $nombre;?>" required> 
                             <?php 
                             if (isset($fallos["nombre"])) { 
                                 echo "<span style='color: red;'>".$fallos["nombre"]."</span>"; 
@@ -139,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                     $stmt->execute();
 
-                    header("Location: categorias.php?categoriaActualizada=OK");
+                    header("Location: subcategorias.php?subcategoriaActualizada=OK");
         
                 } catch(PDOException $e) {
                     echo 'Error al editar la categoria: ' . $e->getMessage();
@@ -223,16 +223,16 @@ $res = $stmt->fetch(PDO::FETCH_OBJ);
 
         <main class="contenido-principal">
             
-            <form class="formulario" action="editarcategoria.php" method="post">
+            <form class="formulario" action="editarsubcategoria.php" method="post">
 
-                <h3>Editar Categoría</h3>
+                <h3>Editar Subcategoría</h3>
 
                 <div class="form-campos form-cambio-contraseña">
 
                     <input type="hidden" name="codigo" id="codigo" value="<?php echo $res->codigo; ?>">
                 
                     <label for="nombre">Nombre</label>
-                    <input class="campo nueva-contraseña" type="text" name="nombre" id="nombre" value="<?php echo $res->nombre; ?>" pattern="[A-Za-z]+" title="Solo se permiten letras" required> 
+                    <input class="campo nueva-contraseña" type="text" name="nombre" id="nombre" value="<?php echo $res->nombre; ?>" required> 
                         
                     <div class="botones-form dni-empleado">
                         <button class="btn-registro" type="submit">Enviar</button>

@@ -215,7 +215,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             $stmt->execute();
 
-                        header("Location: index.php?articuloactualizado=OK");
+                        header("Location: menuarticulos.php?articuloactualizado=OK");
 
                     } catch(PDOException $e) {
                         echo 'Error al insertar el articulo ' . $e->getMessage();

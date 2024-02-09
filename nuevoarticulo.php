@@ -284,7 +284,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             "INSERT INTO articulos (codigo, nombre, precio, preciodest, categoria, descripcion, imagen, activo) VALUES (:codigo, :nombre, :precio, :preciodest, :categoria, :descripcion, :imagen, :activo)");
             
                         $stmt->execute(array(':codigo'=>$codigo, ':nombre'=>$nombre, ':precio'=>$precio, ':preciodest'=>$descuento, ':categoria'=>$categoria, ':descripcion'=>$descripcion, ':imagen'=>$ruta, ':activo'=>$activo));
-                        header("Location: index.php?articulo=OK");
+                        header("Location: menuarticulos.php?articulo=OK");
 
                     } catch(PDOException $e) {
                         echo 'Error al insertar el articulo ' . $e->getMessage();
@@ -392,7 +392,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <option value="">Selecciona una categoría</option>
                             <?php
                             $conexion = $con->conectar_db();
-                            $stmtCategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre IS NOT NULL");
+                            $stmtCategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre IS NOT NULL AND activo = 1");
                             $stmtCategorias->execute();
 
                             while ($categoria = $stmtCategorias->fetch(PDO::FETCH_ASSOC)) {
