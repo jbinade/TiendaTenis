@@ -205,7 +205,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                             <label for="categoria">Categoria</label>
                             <select class="opcion-desplegable" name="categoria" id="categoria">
-                                    <option value=""><?php echo $categoria; ?></option>
+                                    <option value="">Selecciona una categoría</option>
                                     <?php
                                     $conexion = $con->conectar_db();
                                     $stmtCategorias = $conexion->prepare("SELECT * FROM categorias WHERE codcategoriapadre IS NOT NULL");

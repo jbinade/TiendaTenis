@@ -59,9 +59,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $buscarDNI = $con->buscarDNI($dni);
             
             //se comprueba si el dni ya existe en la base de datos
-            if ($buscarDNI) {
-                $fallos["dni"] = "Este DNI ya se encuentra en la base de datos";
-            }
+            //if ($buscarDNI) {
+
+                try {
+
+                    $conexion = $con->conectar_db();
+                    $stmt = $conexion->prepare("SELECT * FROM clientes WHERE dni = :dni");
+                    $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+                    $stmt->execute();
+    
+                   
+                    $dni_existe = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+                    if ($dni_existe) {
+                        if ($dni_existe['activo'] == 0) {
+                            // Si el usuario existe pero está inactivo, permitir el registro
+                            $fallos = array();
+                        } else {
+                            // Si el usuario existe y está activo, mostrar mensaje de error
+                            $fallos["dni"] = "Este DNI ya se encuentra en la base de datos";
+                        }
+                    }
+    
+                } catch(PDOException $e) {
+                        echo 'Error al insertar el email: ' . $e->getMessage();
+                }
+            
         } else {
             $fallos["dni"] = "El DNI es obligatorio";
         }
@@ -95,12 +118,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bindParam(':email', $email, PDO::PARAM_STR);
                 $stmt->execute();
 
-                if ($stmt->rowCount() > 0) {
-                    $fallos["email"] = "Este email ya se encuentra en la base de datos";
+               
+                $email_existe = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($email_existe) {
+                    if ($email_existe['activo'] == 0) {
+                        // Si el usuario existe pero está inactivo, permitir el registro
+                        $fallos = array();
+                    } else {
+                        // Si el usuario existe y está activo, mostrar mensaje de error
+                        $fallos["email"] = "Este email ya se encuentra en uso";
+                    }
                 }
 
             } catch(PDOException $e) {
-                echo 'Error al insertar el email: ' . $e->getMessage();
+                    echo 'Error al insertar el email: ' . $e->getMessage();
             }
 
         }
@@ -311,9 +343,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 
                 try {
-        
+
                     $conexion = $con->conectar_db();
-                    $stmt = $conexion->prepare(
+                    $stmt = $conexion->prepare("SELECT * FROM clientes WHERE dni = :dni");
+                    $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+                    $stmt->execute();
+
+                    if ($stmt->rowCount() > 0) {
+                        
+                        $stmtCliente = $conexion->prepare("UPDATE clientes SET activo = 1 WHERE dni = :dni");
+                        $stmtCliente->bindParam(':dni', $dni, PDO::PARAM_STR);
+                        $stmtCliente->execute();
+
+                        header("Location: index.php?cliente=OK");
+                    
+                    } else {
+                        $stmt = $conexion->prepare(
                         'INSERT INTO clientes (dni, nombre, apellidos, telefono, rol, direccion, localidad, provincia, email, contrasena, activo) VALUES (:dni, :nombre, :apellidos, :telefono, :rol, :direccion, :localidad, :provincia, :email, :contrasena, :activo)');
         
                         $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
@@ -332,6 +377,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     header("Location: index.php?empleado=OK");
         
+                    }
+
                 } catch(PDOException $e) {
                     echo 'Error al insertar el empleado: ' . $e->getMessage();
                 }
