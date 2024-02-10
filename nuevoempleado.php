@@ -351,8 +351,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     if ($stmt->rowCount() > 0) {
                         
-                        $stmtCliente = $conexion->prepare("UPDATE clientes SET activo = 1 WHERE dni = :dni");
+                        $stmtCliente = $conexion->prepare("UPDATE clientes SET nombre = :nombre, apellidos = :apellidos, telefono = :telefono, direccion = :direccion, localidad = :localidad, provincia = :provincia, email = :email, contrasena = :contrasena, activo = 1 WHERE dni = :dni");
                         $stmtCliente->bindParam(':dni', $dni, PDO::PARAM_STR);
+                        $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+                        $stmt->bindParam(':apellidos', $apellidos, PDO::PARAM_STR);
+                        $stmt->bindParam(':telefono', $telefono, PDO::PARAM_STR);
+                        $stmt->bindParam(':direccion', $direccion, PDO::PARAM_STR);
+                        $stmt->bindParam(':localidad', $localidad, PDO::PARAM_STR);
+                        $stmt->bindParam(':provincia', $provincia, PDO::PARAM_STR);
+                        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+                        $stmt->bindParam(':contrasena', $hashcontrasena, PDO::PARAM_STR);
                         $stmtCliente->execute();
 
                         header("Location: index.php?cliente=OK");
