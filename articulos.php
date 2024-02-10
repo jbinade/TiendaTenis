@@ -104,6 +104,9 @@
                         echo '<div class="contenedor-articulos">';   
                             echo '<div class="articulos">';
                                 while ($fila = $stmtArticulos->fetch(PDO::FETCH_ASSOC)) {
+                                    $descuento = $fila['precio'] * $fila['preciodest'];
+                                    $precioConDescuento = $fila['precio'] - $descuento;
+
                                     echo '<div class="articulo">';
                                     echo '<img src="' . $fila['imagen'] . '"alt="imagen">';
                                     echo '<div class="info-articulo">';
@@ -111,8 +114,12 @@
                                     echo '<p class="descripcion">' . $fila['descripcion'] . '</p>';
                                     echo '<div class="precio">';
                                     echo '<div class="precio">';
-                                    echo '<p class="precio-original">' . $fila['precio'] . '€</p>';
-                                    echo '<p class="preciodest">' . $fila['preciodest'] . '€</p>';
+                                    if ($descuento > 0) {
+                                        echo '<p class="precio-original">' . $fila['precio'] . '€</p>';
+                                        echo '<p class="preciodest">' . $precioConDescuento . '€</p>'; 
+                                    } else {
+                                        echo '<p class="">' . $fila['precio'] . '€</p>'; 
+                                    }
                                     echo '</div>';
                                     echo '<button class="btn-articulo">Añadir a la cesta</button>';
                                     echo '</div>';

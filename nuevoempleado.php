@@ -363,7 +363,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $stmtCliente->bindParam(':contrasena', $hashcontrasena, PDO::PARAM_STR);
                         $stmtCliente->execute();
 
-                        header("Location: index.php?cliente=OK");
+                        header("Location: index.php?empleado=OK");
                     
                     } else {
                         $stmt = $conexion->prepare(

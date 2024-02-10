@@ -3,15 +3,13 @@
     if (session_status() == PHP_SESSION_NONE) {
         include("seguridad.php");
     }
-
+   
+        $nombreusuario = $_SESSION["nombre"];
+        $dni = $_SESSION["dni"];
+        //$rol = $_SESSION["rol"]
     
 
-    $nombreusuario = $_SESSION["nombre"];
-    $dni = $_SESSION["dni"];
-    //$rol = $_SESSION["rol"]
- 
-
-    if (($_SESSION["rol"] == "usuario")) {
+        if (($_SESSION["rol"] == "usuario")) {
 
 ?>         
 
@@ -36,7 +34,7 @@
 
 <?php
 
-    } else  if (($_SESSION["rol"] == "administrador")) {
+        } else  if (($_SESSION["rol"] == "administrador")) {
 
 ?>
 
@@ -113,7 +111,7 @@
         
 <?php
 
-    } else {
+        } else {
 
 ?>
 
@@ -180,16 +178,12 @@
                 ?>
             </div>
 
-
         </aside>
-
-
-    
 
 <?php
 
     }
-
+    
 ?>
 
         

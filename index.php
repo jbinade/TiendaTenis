@@ -80,18 +80,21 @@ session_start();
                                 $buscar = '%' . $_GET['buscar'] . '%';
 
                                 // Consulta para obtener los resultados de la búsqueda
-                                $stmt = $conexion->prepare("SELECT imagen, nombre, descripcion, precio, preciodest FROM articulos WHERE nombre LIKE :buscar AND activo = 1 LIMIT $inicio, $PAGS");
+                                $stmt = $conexion->prepare("SELECT codigo, imagen, nombre, descripcion, precio, preciodest FROM articulos WHERE nombre LIKE :buscar AND activo = 1 LIMIT $inicio, $PAGS");
                                 $stmt->bindParam(':buscar', $buscar);
 
                             } else {
                                 // Consulta para obtener todos los artículos
-                                $stmt = $conexion->prepare("SELECT imagen, nombre, descripcion, precio, preciodest FROM articulos WHERE activo = 1 LIMIT $inicio, $PAGS");
+                                $stmt = $conexion->prepare("SELECT codigo, imagen, nombre, descripcion, precio, preciodest FROM articulos WHERE activo = 1 LIMIT $inicio, $PAGS");
                             }
 
                             $stmt->execute();
 
                             if ($stmt->rowCount() > 0) {
                                 while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    $descuento = $fila['precio'] * $fila['preciodest'];
+                                    $precioConDescuento = $fila['precio'] - $descuento;
+
                                     echo '<div class="articulo">';
                                     echo '<img src="' . $fila['imagen'] . '"alt="imagen">';
                                     echo '<div class="info-articulo">';
@@ -99,10 +102,14 @@ session_start();
                                     echo '<p class="descripcion">' . $fila['descripcion'] . '</p>';
                                     echo '<div class="precio">';
                                     echo '<div class="precio">';
-                                    echo '<p class="precio-original">' . $fila['precio'] . '€</p>';
-                                    echo '<p class="preciodest">' . $fila['preciodest'] . '€</p>';
+                                    if ($descuento > 0) {
+                                        echo '<p class="precio-original">' . $fila['precio'] . '€</p>';
+                                        echo '<p class="preciodest">' . $precioConDescuento . '€</p>'; 
+                                    } else {
+                                        echo '<p class="">' . $fila['precio'] . '€</p>'; 
+                                    }
                                     echo '</div>';
-                                    echo '<button class="btn-articulo">Añadir a la cesta</button>';
+                                    echo '<a class="btn-articulo" href="AccionCarta.php?action=addToCart&codigo='. $fila['codigo'] .'">Añadir a la cesta</a>';
                                     echo '</div>';
                                     echo '</div>';
                                     echo '</div>';
@@ -213,4 +220,3 @@ session_start();
     
 
 
-                                                                
