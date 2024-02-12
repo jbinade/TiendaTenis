@@ -30,6 +30,17 @@
                 }
                 ?>
             </div>
+
+            <div id="carrito" style="display: none;">
+                <!-- Icono del carrito -->
+                <img src="icono_carrito.png" alt="Carrito de compras">
+                <!-- Número de artículos en el carrito -->
+                <span id="num_articulos">0</span>
+                <!-- Subtotal del carrito -->
+                <span id="subtotal">0.00 €</span>
+                <!-- Enlace para ver la cesta -->
+                <a href="vercesta.php">Ver Cesta</a>
+            </div>
         </aside>
 
 <?php
@@ -106,6 +117,17 @@
                 }
                 ?>
             </div>
+
+            <div id="carrito" style="display: none;">
+                <!-- Icono del carrito -->
+                <img src="icono_carrito.png" alt="Carrito de compras">
+                <!-- Número de artículos en el carrito -->
+                <span id="num_articulos">0</span>
+                <!-- Subtotal del carrito -->
+                <span id="subtotal">0.00 €</span>
+                <!-- Enlace para ver la cesta -->
+                <a href="vercesta.php">Ver Cesta</a>
+            </div>
         </aside>
      
         
@@ -178,6 +200,16 @@
                 ?>
             </div>
 
+            <div id="carrito" style="display: none;">
+                <!-- Icono del carrito -->
+                <img src="icono_carrito.png" alt="Carrito de compras">
+                <!-- Número de artículos en el carrito -->
+                <span id="num_articulos">0</span>
+                <!-- Subtotal del carrito -->
+                <span id="subtotal">0.00 €</span>
+                <!-- Enlace para ver la cesta -->
+                <a href="vercesta.php">Ver Cesta</a>
+            </div>
         </aside>
 
 <?php

@@ -18,7 +18,7 @@ $carrito = new Carrito;
     </style>
     <script>
     function updateCartItem(obj,id){
-        $.get("cartAction.php", {action:"updateCartItem", id:id, qty:obj.value}, function(data){
+        $.get("AccionCarta.php", {action:"updateCartItem", id:id, qty:obj.value}, function(data){
             if(data == 'ok'){
                 location.reload();
             }else{
@@ -66,7 +66,7 @@ $carrito = new Carrito;
         <tr>
     <td><?php echo isset($item["nombre"]) ? $item["nombre"] : ""; ?></td>
     <td><?php echo isset($item["precio"]) ? '$'.$item["precio"].' USD' : ""; ?></td>
-    <td><input type="number" class="form-control text-center" value="<?php echo isset($item["cantidad"]) ? $item["cantidad"] : ""; ?>" onchange="updateCartItem(this, '<?php echo isset($item['rowcodigo']) ? $item['rowcodigo'] : ""; ?>')"></td>
+    <td><input type="number" class="form-control text-center" value="<?php echo isset($item['cantidad']) ? $item['cantidad'] : ''; ?>" onchange="updateCartItem(this, '<?php echo isset($item['rowcodigo']) ? $item['rowcodigo'] : ''; ?>')"></td>
     <td><?php echo isset($item["subtotal"]) ? '$'.$item["subtotal"].' USD' : ""; ?></td>
     <td>
         <a href="AccionCarta.php?action=removeCartItem&codigo=<?php echo isset($item["rowcodigo"]) ? $item["rowcodigo"] : ""; ?>" class="btn btn-danger" onclick="return confirm('Confirma eliminar?')"><i class="glyphicon glyphicon-trash"></i></a>

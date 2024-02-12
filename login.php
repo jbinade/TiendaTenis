@@ -1,4 +1,6 @@
 
+
+
 <aside class="contenedor asidedca">
 
     <div class="form-login">
@@ -38,5 +40,12 @@
 
         ?>
     </div>
-    
+    <?php
+    if(isset($_SESSION['cart_contents'])) {
+    $carrito_info = $_SESSION['cart_contents']['total_items'] . ' artículos | Subtotal: ' . $_SESSION['cart_contents']['cart_total'] . ' €';
+    } else {
+        $carrito_info = '0 artículos | Subtotal: 0.00 €';
+    }
+    echo '<div id="carrito-info">' . $carrito_info . '</div>';
+?>
 </aside>

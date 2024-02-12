@@ -1,4 +1,5 @@
-<?php session_start();
+<?php 
+session_start();
 
 class Carrito {
     protected $cart_contents = array();
@@ -33,10 +34,10 @@ class Carrito {
 	 * @param	string	$row_id
 	 * @return	array
 	 */
-	public function get_item($row_id){
-		return (in_array($row_id, array('total_items', 'cart_total'), TRUE) OR ! isset($this->cart_contents[$row_id]))
+	public function get_item($codigo){
+		return (in_array($codigo, array('total_items', 'cart_total'), TRUE) OR ! isset($this->cart_contents[$codigo]))
 			? FALSE
-			: $this->cart_contents[$row_id];
+			: $this->cart_contents[$codigo];
 	}
     
     /**
@@ -52,7 +53,17 @@ class Carrito {
 	 * @return	int
 	 */
 	public function total(){
-		return $this->cart_contents['cart_total'];
+		$this->cart_contents['cart_total'] = 0;
+		$this->cart_contents['total_items'] = 0;
+		foreach ($this->cart_contents as $item) {
+			// Asegúrate de que $item es un array antes de intentar acceder a sus índices
+			if(is_array($item) && isset($item['subtotal'], $item['cantidad'])) {
+				$this->cart_contents['cart_total'] += $item['subtotal'];
+				$this->cart_contents['total_items'] += $item['cantidad'];
+    		}
+		}
+
+		return isset($this->cart_contents['cart_total']) ? $this->cart_contents['cart_total'] : 0;
 	}
     
     /**
@@ -104,29 +115,29 @@ class Carrito {
 	public function update($item = array()){
 		if (!is_array($item) OR count($item) === 0){
 			return FALSE;
-		}else{
-			if (!isset($item['rowid'], $this->cart_contents[$item['rowid']])){
+		} else {
+			if (!isset($item['codigo'], $this->cart_contents[$item['codigo']])){
 				return FALSE;
-			}else{
+			} else {
 				// prep the quantity
-				if(isset($item['qty'])){
-					$item['qty'] = (float) $item['qty'];
+				if(isset($item['cantidad'])){
+					$item['cantidad'] = (float) $item['cantidad'];
 					// remove the item from the cart, if quantity is zero
-					if ($item['qty'] == 0){
-						unset($this->cart_contents[$item['rowid']]);
+					if ($item['cantidad'] == 0){
+						unset($this->cart_contents[$item['codigo']]);
 						return TRUE;
 					}
 				}
 				
 				// find updatable keys
-				$keys = array_intersect(array_keys($this->cart_contents[$item['rowid']]), array_keys($item));
+				$keys = array_intersect(array_keys($this->cart_contents[$item['codigo']]), array_keys($item));
 				// prep the price
-				if(isset($item['price'])){
-					$item['price'] = (float) $item['price'];
+				if(isset($item['precio'])){
+					$item['precio'] = (float) $item['precio'];
 				}
 				// product id & name shouldn't be changed
-				foreach(array_diff($keys, array('id', 'name')) as $key){
-					$this->cart_contents[$item['rowid']][$key] = $item[$key];
+				foreach(array_diff($keys, array('codigo', 'nombre')) as $key){
+					$this->cart_contents[$item['codigo']][$key] = $item[$key];
 				}
 				// save cart data
 				$this->save_cart();
@@ -134,6 +145,7 @@ class Carrito {
 			}
 		}
 	}
+	
     
     /**
 	 * Save the cart array to the session
@@ -141,25 +153,29 @@ class Carrito {
 	 */
 	protected function save_cart(){
 		$this->cart_contents['total_items'] = $this->cart_contents['cart_total'] = 0;
-		foreach ($this->cart_contents as $key => $val){
-			// make sure the array contains the proper indexes
-			if(!is_array($val) OR !isset($val['precio'], $val['cantidad'])){
-				continue;
-			}
-	 
-			$this->cart_contents['cart_total'] += ($val['precio'] * $val['cantidad']);
-			$this->cart_contents['total_items'] += $val['cantidad'];
-			$this->cart_contents[$key]['subtotal'] = ($this->cart_contents[$key]['precio'] * $this->cart_contents[$key]['cantidad']);
-		}
-		
-		// if cart empty, delete it from the session
-		if(count($this->cart_contents) <= 2){
-			unset($_SESSION['cart_contents']);
-			return FALSE;
-		}else{
-			$_SESSION['cart_contents'] = $this->cart_contents;
-			return TRUE;
-		}
+        foreach ($this->cart_contents as $key => $val){
+            // make sure the array contains the proper indexes
+            if(!is_array($val) OR !isset($val['precio'], $val['cantidad'], $val['descuento'])){
+                continue;
+            }
+     
+            // Calculate subtotal with discount applied
+            $precioConDescuento = $val['precio'] * (1 - $val['descuento']);
+            $this->cart_contents[$key]['subtotal'] = $precioConDescuento * $val['cantidad'];
+
+            // Update cart total
+            $this->cart_contents['cart_total'] += $this->cart_contents[$key]['subtotal'];
+            $this->cart_contents['total_items'] += $val['cantidad'];
+        }
+        
+        // if cart empty, delete it from the session
+        if(count($this->cart_contents) <= 2){
+            unset($_SESSION['cart_contents']);
+            return FALSE;
+        }else{
+            $_SESSION['cart_contents'] = $this->cart_contents;
+            return TRUE;
+        }
     }
     
     /**
@@ -167,9 +183,9 @@ class Carrito {
 	 * @param	int
 	 * @return	bool
 	 */
-	 public function remove($row_id){
+	 public function remove($codigo){
 		// unset & save
-		unset($this->cart_contents[$row_id]);
+		unset($this->cart_contents[$codigo]);
 		$this->save_cart();
 		return TRUE;
 	 }

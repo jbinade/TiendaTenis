@@ -11,9 +11,11 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/styles.css">
+    
 </head>
 <body>
     <?php include("conectar_db.php");?>
+    <?php include("funciones.php");?>
     <?php include("header.php");?>
     
     <div class="contenedor">
@@ -109,7 +111,7 @@ session_start();
                                         echo '<p class="">' . $fila['precio'] . '€</p>'; 
                                     }
                                     echo '</div>';
-                                    echo '<a class="btn-articulo" href="AccionCarta.php?action=addToCart&codigo='. $fila['codigo'] .'">Añadir a la cesta</a>';
+                                    echo '<a class="btn-articulo" href="javascript:void(0);" onclick="addToCart(\''.$fila['codigo'].'\')">Añadir a la cesta</a>';
                                     echo '</div>';
                                     echo '</div>';
                                     echo '</div>';
@@ -198,25 +200,5 @@ session_start();
 
     <?php include("footer.php");?>
 
-    <script src="js.js"></script>
 </body>
 </html>                                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-

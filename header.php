@@ -13,6 +13,7 @@
             </div>
         </form>
 
+        <div id="carrito-info"></div>
         <nav class="navegacion">
             <a href="#">Envío</a>
             <a href="#">Contacto</a>

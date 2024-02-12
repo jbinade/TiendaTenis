@@ -625,6 +625,7 @@ footer p {
 .btn-registro a:hover {
     background-color: var(--negro);
     color: var(--amarillo);
+    text-decoration: none;
 }
 
 
@@ -778,3 +779,18 @@ table img {
 }
 
 
+/** CARRITO **/
+
+.cantidad {
+    padding: 5px;
+    width: 60px;
+    text-align: center;
+}
+
+.cesta-vacia {
+    text-align: center;
+}
+
+.total-pedido {
+    font-size: 14px;
+}
