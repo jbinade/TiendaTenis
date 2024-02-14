@@ -4,7 +4,7 @@ include("seguridad.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include("conectar_db.php");
-
+    <?php include("funciones.php");?>
     //array para almacenar fallos
     $fallos = array();
 

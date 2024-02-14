@@ -1,54 +1,44 @@
 <?php
 
 // Iniciamos la clase de la carta
-include("conectar_db.php");
-include ("claseCarrito.php");
-$carrito = new Carrito();
-$con = new Conexion();
-// include database configuration file
+session_start();
+include 'La-carta.php';
+$cart = new Cart;
 
+// include database configuration file
+include 'conectar_db.php';
+$con = new Conexion();
+$conexion = $con->conectar_db();
 if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
     if($_REQUEST['action'] == 'addToCart' && !empty($_REQUEST['codigo'])){
-        $codigo = $_REQUEST['codigo'];
+        $productID = $_REQUEST['codigo'];
         // get product details
-        $conexion = $con->conectar_db();
         $stmt = $conexion->prepare("SELECT * FROM articulos WHERE codigo = :codigo");
-        $stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
+        $stmt->bindParam(':codigo', $productID, PDO::PARAM_STR);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $itemData = array(
-            'codigo' => $row['codigo'],
-            'nombre' => $row['nombre'],
-            'precio' => $row['precio'],
+            'id' => $row['codigo'],
+            'name' => $row['nombre'],
+            'price' => $row['precio'],
             'descuento' => $row['preciodest'],
-            'cantidad' => 1
+            'qty' => 1
         );
         
-        $insertItem = $carrito->insert($itemData);
-        // Después de agregar el artículo al carrito, obtén la información actualizada del carrito
-        $_SESSION['cart_contents'] = $carrito->contents();
-
-       
+        $insertItem = $cart->insert($itemData);
         $redirectLoc = $insertItem?'index.php':'index.php';
         header("Location: ".$redirectLoc);
-
-    } elseif ($_REQUEST['action'] == 'updateCartItem' && !empty($_REQUEST['codigo'])){
+    }elseif($_REQUEST['action'] == 'updateCartItem' && !empty($_REQUEST['id'])){
         $itemData = array(
-            'codigo' => $_REQUEST['codigo'],
-            'cantidad' => $_REQUEST['cantidad']
-
+            'rowid' => $_REQUEST['id'],
+            'qty' => $_REQUEST['qty']
         );
-        $updateItem = $carrito->update($itemData);
-
-        $nuevoSubtotal = $carrito->get_item($item['codigo'])['subtotal'];
-
-        echo 'ok:' . $nuevoSubtotal;
-
-    } elseif ($_REQUEST['action'] == 'removeCartItem' && !empty($_REQUEST['codigo'])){
-        $deleteItem = $carrito->remove($_REQUEST['codigo']);
+        $updateItem = $cart->update($itemData);
+        echo $updateItem?'ok':'err';die;
+    }elseif($_REQUEST['action'] == 'removeCartItem' && !empty($_REQUEST['id'])){
+        $deleteItem = $cart->remove($_REQUEST['id']);
         header("Location: vercesta.php");
-
-    } elseif ($_REQUEST['action'] == 'placeOrder' && $cart->total_items() > 0 && !empty($_SESSION['sessCustomerID'])){
+    }elseif($_REQUEST['action'] == 'placeOrder' && $cart->total_items() > 0 && !empty($_SESSION['sessCustomerID'])){
         // insert order details into database
         $insertOrder = $db->query("INSERT INTO orden (customer_id, total_price, created, modified) VALUES ('".$_SESSION['sessCustomerID']."', '".$cart->total()."', '".date("Y-m-d H:i:s")."', '".date("Y-m-d H:i:s")."')");
         

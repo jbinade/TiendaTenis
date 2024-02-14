@@ -53,6 +53,7 @@ if(isset($_REQUEST["codigo"])) {
 </head>
 <body>
     <?php include("conectar_db.php");?>
+    <?php include("funciones.php");?>
     <?php include("header.php");?>
     
     <div class="contenedor">
@@ -119,6 +120,6 @@ if(isset($_REQUEST["codigo"])) {
 
     <?php include("footer.php");?>
 
-    <script src="js.js"></script>
+
 </body>
 </html>              

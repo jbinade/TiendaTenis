@@ -1,6 +1,7 @@
 <?php
 
 include("seguridad.php");
+include ('La-carta.php');
 
 ?>
 
@@ -14,6 +15,7 @@ include("seguridad.php");
 </head>
 <body>
     <?php include("conectar_db.php");?>
+    <?php include("funciones.php");?>
     <?php include("header.php");?>
     
     <div class="contenedor">

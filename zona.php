@@ -31,16 +31,28 @@
                 ?>
             </div>
 
-            <div id="carrito" style="display: none;">
-                <!-- Icono del carrito -->
-                <img src="icono_carrito.png" alt="Carrito de compras">
-                <!-- Número de artículos en el carrito -->
-                <span id="num_articulos">0</span>
-                <!-- Subtotal del carrito -->
-                <span id="subtotal">0.00 €</span>
-                <!-- Enlace para ver la cesta -->
-                <a href="vercesta.php">Ver Cesta</a>
-            </div>
+            <?php
+                 $cart = new Cart;
+
+                 $total_items = $cart->total_items();
+                 if($total_items > 0) {
+                     //get cart items from session
+                     $Items = count($cart->contents());
+                     $total = $cart->total();
+                     
+                     echo "<div class='carrito'>";
+                     echo '<img src="./images/carrito.png" alt="carrito">';
+                     if ($Items == 1) {
+                         echo "<p>" . $Items . " Artículo</p>";
+                     } else {
+                         echo "<p>" . $Items . " Artículos</p>";
+                     }
+                     
+                     echo "<p>" . $total . " €</p>";
+                     echo "<a class='btn-registro' href='vercesta.php'>Ver Cesta</a>";
+                     echo "</div>";
+                 }  
+            ?>
         </aside>
 
 <?php
@@ -118,16 +130,29 @@
                 ?>
             </div>
 
-            <div id="carrito" style="display: none;">
-                <!-- Icono del carrito -->
-                <img src="icono_carrito.png" alt="Carrito de compras">
-                <!-- Número de artículos en el carrito -->
-                <span id="num_articulos">0</span>
-                <!-- Subtotal del carrito -->
-                <span id="subtotal">0.00 €</span>
-                <!-- Enlace para ver la cesta -->
-                <a href="vercesta.php">Ver Cesta</a>
-            </div>
+            <?php
+             $cart = new Cart;
+
+             $total_items = $cart->total_items();
+             if($total_items > 0) {
+                 //get cart items from session
+                 $Items = count($cart->contents());
+                 $total = $cart->total();
+                 
+                 echo "<div class='carrito'>";
+                 echo '<img src="./images/carrito.png" alt="carrito">';
+                 if ($Items == 1) {
+                     echo "<p>" . $Items . " Artículo</p>";
+                 } else {
+                     echo "<p>" . $Items . " Artículos</p>";
+                 }
+                 
+                 echo "<p>" . $total . " €</p>";
+                 echo "<a class='btn-registro' href='vercesta.php'>Ver Cesta</a>";
+                 echo "</div>";
+             }  
+   
+            ?>
         </aside>
      
         
@@ -200,16 +225,29 @@
                 ?>
             </div>
 
-            <div id="carrito" style="display: none;">
-                <!-- Icono del carrito -->
-                <img src="icono_carrito.png" alt="Carrito de compras">
-                <!-- Número de artículos en el carrito -->
-                <span id="num_articulos">0</span>
-                <!-- Subtotal del carrito -->
-                <span id="subtotal">0.00 €</span>
-                <!-- Enlace para ver la cesta -->
-                <a href="vercesta.php">Ver Cesta</a>
-            </div>
+            <?php
+             $cart = new Cart;
+
+             $total_items = $cart->total_items();
+             if($total_items > 0) {
+                 //get cart items from session
+                 $Items = count($cart->contents());
+                 $total = $cart->total();
+                 
+                 echo "<div class='carrito'>";
+                 echo '<img src="./images/carrito.png" alt="carrito">';
+                 if ($Items == 1) {
+                     echo "<p>" . $Items . " Artículo</p>";
+                 } else {
+                     echo "<p>" . $Items . " Artículos</p>";
+                 }
+                 
+                 echo "<p>" . $total . " €</p>";
+                 echo "<a class='btn-registro' href='vercesta.php'>Ver Cesta</a>";
+                 echo "</div>";
+             }  
+   
+            ?>
         </aside>
 
 <?php

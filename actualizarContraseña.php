@@ -1,6 +1,7 @@
 <?php
 
     include("conectar_db.php");
+    include("funciones.php");
     // Recuperar los valores del formulario
     $dni = $_REQUEST["dni"];
     $email = $_REQUEST["email"];
@@ -99,7 +100,7 @@
 
                 <?php include("footer.php");?>
 
-                <script src="js.js"></script>
+         
             </body>
             </html>
 
@@ -192,7 +193,7 @@
 
             <?php include("footer.php");?>
 
-            <script src="js.js"></script>
+     
         </body>
         </html>
 

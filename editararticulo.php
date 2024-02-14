@@ -4,7 +4,7 @@ include("seguridad.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include("conectar_db.php");
-
+    include("funciones.php");
     $con = new Conexion();
 
     //array para almacenar fallos
@@ -230,7 +230,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <?php
 include("conectar_db.php");
-
+include("funciones.php");
 if(isset($_REQUEST["codigo"])) {
     $codigo = $_REQUEST["codigo"];
 

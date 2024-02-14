@@ -5,7 +5,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     include("conectar_db.php");
-
+    include("funciones.php");
     //array para almacenar fallos
     $fallos = array();
 
@@ -241,7 +241,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 
 include("conectar_db.php");
-
+include("funciones.php");
 if(isset($_REQUEST["dni"])) {
     $dni = $_REQUEST["dni"];
 

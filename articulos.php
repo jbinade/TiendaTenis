@@ -1,6 +1,6 @@
 <?php
-
-    session_start();
+session_start();
+include ('La-carta.php');
 
 ?>
 
@@ -14,6 +14,7 @@
 </head>
 <body>
     <?php include("conectar_db.php");?>
+    <?php include("funciones.php");?>
     <?php include("header.php");?>
     
     <div class="contenedor">
@@ -121,7 +122,7 @@
                                         echo '<p class="">' . $fila['precio'] . '€</p>'; 
                                     }
                                     echo '</div>';
-                                    echo '<button class="btn-articulo">Añadir a la cesta</button>';
+                                    echo '<a class="btn-articulo" href="AccionCarta.php?action=addToCart&codigo='. $fila['codigo'] .'">Añadir a la cesta</a>';
                                     echo '</div>';
                                     echo '</div>';
                                     echo '</div>';
@@ -177,6 +178,5 @@
 
     <?php include("footer.php");?>
 
-    <script src="js.js"></script>
 </body>
 </html>
