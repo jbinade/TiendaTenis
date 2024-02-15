@@ -4,7 +4,7 @@ include("seguridad.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include("conectar_db.php");
-    <?php include("funciones.php");?>
+    include("funciones.php");
     //array para almacenar fallos
     $fallos = array();
 
@@ -218,7 +218,7 @@ $datos = $con->buscarCliente($dni);
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    
+    <?php include("funciones.php");?>
     <?php include("header.php");?>
     
     <div class="contenedor">

@@ -23,6 +23,7 @@
             <link rel="stylesheet" href="./css/styles.css">
         </head>
         <body>
+            <?php include("funciones.php");?>
             <?php include("header.php");?>
             
             <div class="contenedor">
@@ -97,7 +98,7 @@
 
             <?php include("footer.php");?>
 
-            <script src="js.js"></script>
+          
         </body>
         </html>
     

@@ -50,6 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <link rel="stylesheet" href="./css/styles.css">
         </head>
         <body>
+            <?php include("funciones.php");?>
             <?php include("header.php");?>
 
             <div class="contenedor">
@@ -121,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <?php include("footer.php");?>
 
-            <script src="js.js"></script>
+           
         </body>
         </html>
         
@@ -164,6 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <?php include("conectar_db.php");?>
+    <?php include("funciones.php");?>
     <?php include("header.php");?>
     
     <div class="contenedor">
@@ -231,6 +233,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <?php include("footer.php");?>
 
-    <script src="js.js"></script>
+   
 </body>
 </html>         

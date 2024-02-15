@@ -48,8 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <link rel="stylesheet" href="./css/styles.css">
         </head>
         <body>
+            <?php include("funciones.php");?>
             <?php include("header.php");?>
-
+            
             <div class="contenedor">
                 
                 <aside class="asideizq">
@@ -121,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <?php include("footer.php");?>
 
-            <script src="js.js"></script>
+            
         </body>
         </html>
         
@@ -179,7 +180,7 @@ $res = $stmt->fetch(PDO::FETCH_OBJ);
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    
+    <?php include("funciones.php");?>
     <?php include("header.php");?>
     
     <div class="contenedor">
@@ -249,6 +250,6 @@ $res = $stmt->fetch(PDO::FETCH_OBJ);
 
     <?php include("footer.php");?>
 
-    <script src="js.js"></script>
+    
 </body>
 </html>         

@@ -14,6 +14,7 @@ include ('La-carta.php');
 </head>
 <body>
     <?php include("conectar_db.php");?>
+    <?php include("funciones.php");?>
     <?php include("header.php");?>
     
     <div class="contenedor">
@@ -159,6 +160,6 @@ include ('La-carta.php');
 
     <?php include("footer.php");?>
 
-    <script src="js.js"></script>
+  
 </body>
 </html>                                   

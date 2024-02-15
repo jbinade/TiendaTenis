@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <link rel="stylesheet" href="./css/styles.css">
         </head>
         <body>
+            <?php include("funciones.php");?>
             <?php include("header.php");?>
 
             <div class="contenedor">
@@ -179,7 +180,7 @@ $res = $stmt->fetch(PDO::FETCH_OBJ);
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    
+    <?php include("funciones.php");?>
     <?php include("header.php");?>
     
     <div class="contenedor">
