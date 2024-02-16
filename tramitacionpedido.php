@@ -1,7 +1,14 @@
 <?php
+
     session_start();
-  include 'La-carta.php';
-  $cart = new Cart;
+    include 'La-carta.php';
+    
+    
+    
+    if (isset($_SESSION["rol"])) {
+
+        $dni = $_SESSION["dni"];
+
 ?>
 
 <!DOCTYPE html>
@@ -11,18 +18,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>
-       function updateCartItem(obj,id){
-            $.get("AccionCarta.php", {action:"updateCartItem", id:id, qty:obj.value}, function(data){
-                if(data == 'ok'){
-                    location.reload();
-                }else{
-                    alert('Cart update failed, please try again.');
-                }
-            });
-        }
-    </script>
 </head>
 <body>
     <?php include("conectar_db.php");?>
@@ -74,27 +69,28 @@
 
                 <div class="tabla">
 
-                    <h3>Tu Cesta</h3> 
+                    <h3 class="tu-pedido">Tu Pedido</h3> 
 
                     <table>
                         <tr id="campos">
-                            <th>Código</th>
-                            <th>Nombre</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                            <th>Descuento</th>
-                            <th>Subtotal</th>
-                            <th class="borrarUser"></th>
+                            
                         </tr>
 
 <?php
 
-
+                            $cart = new Cart;
                             $total_items = $cart->total_items();
                             if($total_items > 0) {
                                 //get cart items from session
                                 $cartItems = $cart->contents();
                                 foreach($cartItems as $item){
+
+                                    $con = new Conexion();
+                                    $conexion = $con->conectar_db();
+                                    $stmt = $conexion->prepare("SELECT * FROM articulos WHERE codigo = :codigo");
+                                    $stmt->bindParam(':codigo', $item["id"]);
+                                    $stmt->execute();
+                                    $fila = $stmt->fetch(PDO::FETCH_ASSOC);
 
                                     $porcentajeDescuento = isset($item["descuento"]) ? $item["descuento"] * 100 : 0;
                                     if (isset($item["price"], $item["descuento"], $item["qty"])) {
@@ -105,19 +101,16 @@
                                     }
 ?>
 
-                        <tr class="campos-cesta">
-                            <td><?php echo $item["id"]; ?></td>
-                            <td><?php echo $item["name"]; ?></td>
-                            <td><?php echo $item["price"].' €'; ?></td>
-                            <td><input type="number" class="cantidad" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item['rowid']; ?>')"></td>
-                            <td><?php echo $porcentajeDescuento . "%"; ?></td>
-                            <td><?php echo $subtotalConDescuento . ' €'; ?></td> 
-                            <td>
-                            <a href="AccionCarta.php?action=removeCartItem&id=<?php echo $item["rowid"]; ?>" class="btn btn-danger"><img src='./images/borrar.jpg' alt='Borrar'></a>
-                            </td>
-                        </tr>
+                                <tr class="cesta-pedido">
+                                    <td ><?php echo '<img class="imagen-cesta" src="' . $fila['imagen'] . '"alt="imagen">'; ?></td>
+                                    <td class="producto"><?php echo $item["qty"]; ?></td>
+                                    <td><?php echo $item["name"]; ?></td>
+                                    <td><?php echo $item["price"].' €'; ?></td>
+                                    <td><?php echo $porcentajeDescuento . "% Dto."; ?></td>
+                                    <td><?php echo $subtotalConDescuento . ' €'; ?></td> 
+                                </tr>
 <?php                   
-                                } 
+                            } 
 
                             } else { ?>
 
@@ -134,7 +127,7 @@
                                 <td colspan="2"></td>
                                 <td colspan="1"></td>
                                 <td ><strong class="total-pedido" id="total_pedido">TOTAL PEDIDO: <?php echo $cart->total().' €'; ?></strong></td>
-                                <td colspan="1"></td>
+                                
                             
 <?php 
                                 } ?>
@@ -143,8 +136,7 @@
                     </table>
 
                     <div class="botones-form">
-                        <a class="btn-registro" href="index.php">Seguir Comprando</a>
-                        <a class="btn-registro" href="tramitacionpedido.php">Realizar Pedido</a>
+                        <a class="btn-registro" href="datosenvio.php">Continuar</a>
                     </div>
 
                 </div>    
@@ -154,13 +146,8 @@
         </main>
 
         <?php 
-            if (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] === true) {
-                // Si está autenticado, incluye el contenido de la zona
-                include("zona.php");
-            } else {
-                // Si no está autenticado, incluye el formulario de inicio de sesión
-                include("login.php");
-            }
+            include("zona.php");
+           
         ?>
 
     </div>
@@ -170,3 +157,98 @@
    
 </body>
 </html>                               
+
+<?php
+
+    } else {
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <?php include("conectar_db.php");?>
+ 
+    <?php include("funciones.php");?>
+    <?php include("header.php");?>
+    
+    <div class="contenedor">
+
+        
+
+        <main class="contenido-principal">
+            
+            <div class="tramitacion">
+            
+                <div class="tramitacion-cliente">
+                    <h3>Nuevo Cliente</h3>
+                    <p class="tramitacion-cliente-cuenta1">¿Necesitas una cuenta?</p>
+                    <p class="tramitacion-cliente-cuenta">Al crear una cuenta en TENNISMATCH podrá realizar sus compras rápidamente,
+                    revisar el estado de sus pedidos y consultar sus anteriores operaciones.</p>
+                    <a class="btn-login" href="formRegistro.php">Registrarse</a>
+                </div>
+
+                <div class="tramitacion-login">
+                    <form action="conexion.php" method="post" class="login">
+                        <h3>Ya Soy Cliente</h3>
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email">
+
+                        <label for="contraseña">Contraseña</label>
+                        <input type="password" name="contrasena" id="contraseña">
+
+                        <input class="btn-login" type="submit" name="login" id="login" value="Enviar">
+                        
+                        <div class="enlaces-login">
+                            <a href="cambioContraseña.php">¿Has olvidado tu contraseña?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </main>
+
+        
+    </div>
+
+    <?php include("footer.php");?>
+
+  
+</body>
+</html>              
+
+
+<?php
+    }
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

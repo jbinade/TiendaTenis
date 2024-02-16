@@ -628,6 +628,10 @@ footer p {
     text-decoration: none;
 }
 
+.btn-envio {
+    margin-bottom: 20px;
+}
+
 
 /** ZONA **/
 
@@ -806,4 +810,59 @@ table img {
     text-align: center;
     margin: 0;
     font-weight: 500;
+}
+
+.cesta-pedido {
+    border-top: 1px solid var(--oscuro);
+}
+
+.imagen-cesta {
+    height: 80px;
+    width: 60px;
+}
+
+/** TRAMITAR PEDIDO **/
+
+.tramitacion {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
+
+    height: 350px;
+    border: 1px solid var(--oscuro);
+}
+
+.tramitacion-cliente {
+    width: 60%;
+    border-right: 1px solid var(--negro);
+    height: 80%;
+  
+}
+
+.tramitacion-cliente h3 {
+    text-align: center;
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+
+.tramitacion-cliente-cuenta1 {
+    padding-bottom: 15px;
+}
+
+.tramitacion-cliente-cuenta {
+    font-size: 12px;
+    padding-right: 10px;
+    padding-bottom: 30px;
+}
+
+.tramitacion-cliente a {
+    padding-top: 10px;
+    text-decoration: none;
+}
+
+.tramitacion-login {
+    margin-left: 50px;
 }
