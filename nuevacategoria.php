@@ -1,6 +1,7 @@
 <?php
 
 include("seguridad.php");
+include ('La-carta.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include("conectar_db.php");
@@ -165,6 +166,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <?php include("conectar_db.php");?>
+   
     <?php include("funciones.php");?>
     <?php include("header.php");?>
     

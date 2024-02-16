@@ -1,7 +1,7 @@
 <?php
 
 include("seguridad.php");
-
+include ('La-carta.php');
 ?>
 
 <!DOCTYPE html>

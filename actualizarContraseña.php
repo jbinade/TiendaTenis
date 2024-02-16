@@ -1,6 +1,7 @@
 <?php
-
+    session_start();
     include("conectar_db.php");
+    include ('La-carta.php');
     include("funciones.php");
     // Recuperar los valores del formulario
     $dni = $_REQUEST["dni"];

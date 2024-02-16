@@ -1,3 +1,8 @@
+<?php
+session_start();
+include ('La-carta.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

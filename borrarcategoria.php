@@ -2,7 +2,7 @@
 
 include("seguridad.php");
 
-
+include ('La-carta.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     

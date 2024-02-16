@@ -1,7 +1,7 @@
 <?php
 
 include("seguridad.php");
-
+include ('La-carta.php');
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +71,6 @@ include("seguridad.php");
                             <th>Categoría</th>
                             <th>Precio</th>
                             <th>Precio Descuento</th>
-                            <th>Provincia</th>
                             <th class="editarUser">Editar</th>
                             <th class="borrarUser">Borrar</th>
                         </tr>
@@ -100,12 +99,14 @@ include("seguridad.php");
                             $stmt->execute();
                             
                             while ($res = $stmt->fetch(PDO::FETCH_OBJ)) {
+                                $descuento = $res->precio * $res->preciodest;
+                                $precioConDescuento = $res->precio - $descuento;
                                 echo "<tr>";
                                 echo "<td>" . $res->codigo . "</td>";
                                 echo "<td>" . $res->nombre . "</td>";
                                 echo "<td>" . $res->categoria . "</td>";
-                                echo "<td>" . $res->precio . "</td>";
-                                echo "<td>" . $res->preciodest . "</td>";
+                                echo "<td>" . $res->precio . " €</td>";
+                                echo "<td>" . $precioConDescuento . " €</td>";
                                 echo "<td><a href='editararticulo.php?dni=" . $res->codigo . "'><img src='./images/editar.png' alt='Editar'></a></td>";
                                 echo "<td><a href='borrararticulo.php?dni=" . $res->codigo . "'><img src='./images/borrar.jpg' alt='Borrar'></a></td>";
                                 echo "</tr>";

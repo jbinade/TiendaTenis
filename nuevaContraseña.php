@@ -1,6 +1,7 @@
 <?php
-
+    session_start();
     include("conectar_db.php");
+    include ('La-carta.php');
     
     $dni = $_REQUEST["dni"];
     $email = $_REQUEST["email"];

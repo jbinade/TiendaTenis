@@ -1,8 +1,8 @@
 <?php
-
+    session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include("conectar_db.php");
-
+    include ('La-carta.php');
     $con = new Conexion();
 
     //array para almacenar fallos
@@ -137,6 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //si hay fallos al introducir el fomulario se vuelve a mostrar indicando el error en color rojo
     if (count($fallos) > 0) {
+        
 ?>
         
         <!DOCTYPE html>
@@ -148,6 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <link rel="stylesheet" href="./css/styles.css">
         </head>
         <body>
+        
             <?php include("funciones.php");?>
             <?php include("header.php");?>
 
@@ -310,6 +312,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 
+<?php
+include ('La-carta.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -321,6 +326,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <?php include("conectar_db.php");?>
+ 
     <?php include("funciones.php");?>
     <?php include("header.php");?>
     
