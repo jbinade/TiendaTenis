@@ -218,7 +218,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo 'Error al insertar el cliente: ' . $e->getMessage();
                 }
         
-                header("Location: miCuenta.php");
+                header("Location: tramitacionpago.php");
 
 
             }
@@ -349,7 +349,7 @@ $datos = $con->buscarCliente($dni);
 
     <?php include("footer.php");?>
 
-    <script src="js.js"></script>
+    
 </body>
 </html>              
 

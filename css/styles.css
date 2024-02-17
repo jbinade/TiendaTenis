@@ -866,3 +866,57 @@ table img {
 .tramitacion-login {
     margin-left: 50px;
 }
+
+.form-pago {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.elegir-pago {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.metodo-pago {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    padding-left: 60px;
+}
+
+.metodo-pago input {
+    margin-right: 10px;
+}
+
+.metodo-pago label img {
+    width: 200px;
+    height: 200px;
+}
+
+.pedido-confirmado {
+    border-left: 1px solid var(--oscuro);
+    text-align: center;
+    height: 100%;
+}
+
+.pedido-confirmado h3 {
+    margin-top: 60px;
+}
+
+.pedido-confirmado p {
+    font-size: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.pedido-confirmado a {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--oscuro);
+}
+
+.pedido-confirmado a:hover {
+    color: var(--negro);
+}
