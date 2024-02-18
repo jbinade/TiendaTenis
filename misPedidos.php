@@ -78,7 +78,7 @@ include ('La-carta.php');
                         try {
 
                             //Limito la búsqueda de cada página
-                            $PAGS = 4;
+                            $PAGS = 8;
 
                             //inicializamos la página y el inicio para el límite de SQL
                             $pagina = isset($_GET["pagina"]) ? $_GET["pagina"] : 1;
@@ -103,10 +103,9 @@ include ('La-carta.php');
                                 echo "<tr>";
                                 echo "<td>" . $res->idPedido . "</td>";
                                 echo "<td>" . $res->fecha . "</td>";
-                                echo "<td>" . $res->total . "</td>";
+                                echo "<td>" . $res->total . " €</td>";
                                 echo "<td>" . $res->estado . "</td>";
-                                echo "<td>" . $res->localidad . "</td>";
-                                echo "<td><a href='verPedidos.php?dni=" . $res->idPedido . "'><img src='./images/editar.png' alt='Editar'></a></td>";
+                                echo "<td><a href='verpedidouser.php?pedido=" . $res->idPedido . "'><img src='./images/editar.png' alt='Editar'></a></td>";
                                 echo "</tr>";
                             }
                     echo "</table>";

@@ -920,3 +920,9 @@ table img {
 .pedido-confirmado a:hover {
     color: var(--negro);
 }
+
+/** VER PEDIDOS **/
+
+.consultar-pedido {
+    margin-bottom: 30px;
+}
