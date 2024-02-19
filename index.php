@@ -61,6 +61,11 @@
         <main class="contenido-principal">
 
             <div class="contenedor-articulos">
+                    
+                <div class="banner">
+                        <img src="./images/Banner.svg" alt="imagen banner">
+                </div>
+
                 <div class="articulos">
 
                     <?php
