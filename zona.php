@@ -70,7 +70,7 @@
                     <a href="empleados.php">Empleados</a>
                     <a href="menucategorias.php">Categorías</a>
                     <a href="menuarticulos.php">Artículos</a>
-                    <a href="">Pedidos</a>
+                    <a href="pedidos.php">Pedidos</a>
                     <a href="resetpassword.php">Actualizar Contraseña</a>
                     <a href="salir.php">Cerrar Sesión</a>
                 </div>
@@ -170,7 +170,7 @@
                     <a href="clientes.php">Clientes</a>
                     <a href="menucategorias.php">Categorías</a>
                     <a href="menuarticulos.php">Artículos</a>
-                    <a href="">Pedidos</a>
+                    <a href="pedidos.php">Pedidos</a>
                     <a href="resetpassword.php">Actualizar Contraseña</a>
                     <a href="salir.php">Cerrar Sesión</a>
                 </div>

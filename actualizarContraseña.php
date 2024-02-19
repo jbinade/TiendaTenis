@@ -85,7 +85,7 @@
                                 <input type="hidden" name="email" value="<?php echo $email ?>">
                             
                                 <label for="contraseña">Introduce tu nueva contraseña</label>
-                                <input class="campo nueva-contraseña" type="password" name="contrasena" id="contrasena" required>                        
+                                <input class="campo nueva-contraseña" type="password" name="contrasena" id="contrasena" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe tener al menos 8 caracteres, un número, una mayúscula y una minúscula" required>                        
 
                                 <div class="botones-form">
                                     <button class="btn-registro" type="submit">Enviar</button>

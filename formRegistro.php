@@ -238,7 +238,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             ?>
 
                             <label for="contraseña">Contraseña</label>
-                            <input class="campo campo-contraseña" type="password" name="contrasena" id="contrasena" value="<?php echo $contrasena; ?>" required>
+                            <input class="campo campo-contraseña" type="password" name="contrasena" id="contrasena" value="<?php echo $contrasena; ?>" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe tener al menos 8 caracteres, un número, una mayúscula y una minúscula" required>
                             <?php 
                                 if (isset($fallos["contrasena"])) { 
                                     echo "<span style='color: red;'>".$fallos["contrasena"]."</span>"; 
@@ -377,25 +377,25 @@ include ('La-carta.php');
 
                 <div class="form-campos">
                     <label for="dni">DNI</label>
-                    <input class="campo campo-dni" type="text" name="dni" id="dni">
+                    <input class="campo campo-dni" type="text" name="dni" id="dni" required>
                 
                     <div class="campo-nombre">
                         <div class="nombre">
                             <label for="nombre">Nombre</label>
-                            <input class="campo" type="text" name="nombre" id="nombre" > 
+                            <input class="campo" type="text" name="nombre" id="nombre" required> 
                         </div>
                         
                         <div class="apellidos">
                             <label for="nombre">Apellidos</label>
-                            <input class="campo" type="text" name="apellidos" id="apellidos" >
+                            <input class="campo" type="text" name="apellidos" id="apellidos" required>
                         </div>
                     </div>
              
                     <label for="email">Email</label>
-                    <input class="campo campo-email" type="email" name="email" id="email" >
+                    <input class="campo campo-email" type="email" name="email" id="email" required>
 
                     <label for="contraseña">Contraseña</label>
-                    <input class="campo campo-contraseña" type="password" name="contrasena" id="contrasena" >
+                    <input class="campo campo-contraseña" type="password" name="contrasena" id="contrasena" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe tener al menos 8 caracteres, un número, una mayúscula y una minúscula" required>
 
                     <div class="botones-form">
                         <button class="btn-registro" type="submit">Crear Cuenta</button>

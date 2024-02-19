@@ -41,7 +41,7 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
     }elseif($_REQUEST['action'] == 'placeOrder' && $cart->total_items() > 0 && !empty($_REQUEST['dni'])){
         // insert order details into database
         $dni = $_REQUEST["dni"];
-        $estado = "creado";
+        $estado = "Creado";
         $activo = 1;
 
         $stmt = $conexion->prepare(
