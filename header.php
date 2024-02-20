@@ -2,7 +2,7 @@
     <div class="header">
         <div class="logo">
             <a href=""><img src="./images/logo.png" alt="imagen logo"></a>
-            <h1><a href="index.php">TENNIS<span>MATCH</span></a></h1>
+            <h1><a href="index.php">MATCH<span>POINT</span></a></h1>
         </div>
 
 

@@ -2,7 +2,7 @@
     <div class="footer">
         <div class="logo logo-footer">
             <img src="./images/logo.png" alt="imagen logo">
-            <h3>TENNIS<span>MATCH</span></h3>
+            <h3>MATCH<span>POINT</span></h3>
         </div>
 
         <div class="enlaces-footer">
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <p>copyright &copy; Tennismatch 2024</p>
+    <p>copyright &copy; Matchpoint 2024</p>
     
 </footer>
 
