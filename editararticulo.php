@@ -327,12 +327,12 @@ $res2 = $stmtDesplegable->fetch(PDO::FETCH_OBJ);
                     <div class="campo-nombre">
                         <div class="nombre">
                             <label for="precio">Precio</label>
-                            <input class="campo" type="number" name="precio" id="precio" value="<?php echo $res->precio; ?>" required> 
+                            <input class="campo" type="text" name="precio" id="precio" value="<?php echo $res->precio; ?>" required> 
                         </div>
                         
                         <div class="apellidos">
-                            <label for="descuento">Precio Descuento</label>
-                            <input class="campo" type="number" name="descuento" id="descuento" value="<?php echo $res->preciodest; ?>">
+                            <label for="descuento">Descuento</label>
+                            <input class="campo" type="text" name="descuento" id="descuento" value="<?php echo $res->preciodest; ?>">
                         </div>
                     </div>
 
