@@ -199,7 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </div>
                                 
                                 <div class="apellidos">
-                                    <label for="descuento">Precio Descuento</label>
+                                    <label for="descuento">Descuento</label>
                                     <input class="campo" type="number" name="descuento" id="descuento" value="<?php echo $descuento; ?>">
                                 </div>
                             </div>
@@ -384,7 +384,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         
                         <div class="apellidos">
-                            <label for="descuento">Precio Descuento</label>
+                            <label for="descuento">Descuento</label>
                             <input class="campo" type="number" name="descuento" id="descuento">
                         </div>
                     </div>
