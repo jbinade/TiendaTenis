@@ -68,7 +68,7 @@ include ('La-carta.php');
                         <tr id="campos">
                             <th>Código</th>
                             <th>Nombre <br><a href="listsubcategoriasinactAsc.php">ASC</a> <a href="listsubcategoriasinactDesc.php">DESC</a></th>
-                            <th class="editarUser">Editar</th>
+                            <th class="editarUser">Activar</th>
                         </tr>
 
 <?php

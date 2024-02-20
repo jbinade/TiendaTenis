@@ -283,7 +283,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $stmtCliente->bindParam(':contrasena', $hashcontrasena, PDO::PARAM_STR);
                         $stmtCliente->execute();
 
-                        header("Location: index.php?cliente=OK");
+                        header("Location: conexion.php?email=$email&contrasena=$hashcontrasena");
 
                     } else {
                         $stmtRegistro = $conexion->prepare(
@@ -298,7 +298,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                         $stmtRegistro->execute();
 
-                        header("Location: index.php?registro=OK");
+                        header("Location: conexion.php?email=$email&contrasena=$hashcontrasena");
 
                     }
 

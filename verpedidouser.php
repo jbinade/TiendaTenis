@@ -165,7 +165,7 @@ $resCliente = $stmtCliente->fetch(PDO::FETCH_OBJ);
                     </table>
 
                     <div class="botones-form">
-                        <a class="btn-registro" href="cancelarpedido.php">Cancelar Pedido</a>
+                        <a class="btn-registro" href="borrarpedido.php">Cancelar Pedido</a>
                         <a class="btn-registro" href="misPedidos.php">Volver a Mis Pedidos</a>
                     </div>
 

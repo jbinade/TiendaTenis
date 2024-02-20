@@ -2,8 +2,14 @@
 
     include("conectar_db.php");
 
-    $email = $_REQUEST["email"];
-    $contrasena = $_REQUEST["contrasena"];
+    if(isset($_REQUEST["email"])) {
+        $email = $_REQUEST["email"];
+    }
+    
+    if(isset($_REQUEST["contrasena"])) {
+        $contrasena = $_REQUEST["contrasena"];
+    }
+    
 
     try {
         $con = new Conexion();
