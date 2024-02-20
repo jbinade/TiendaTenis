@@ -190,7 +190,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="campo-nombre">
                                 <div class="nombre">
                                     <label for="precio">Precio</label>
-                                    <input class="campo" type="number" name="precio" id="precio" value="<?php echo $precio; ?>" required> 
+                                    <input class="campo" type="text" name="precio" id="precio" value="<?php echo $precio; ?>" required> 
                                     <?php 
                                     if (isset($fallos["precio"])) { 
                                         echo "<span style='color: red;'>". $fallos["precio"]."</span>"; 
@@ -200,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 
                                 <div class="apellidos">
                                     <label for="descuento">Descuento</label>
-                                    <input class="campo" type="number" name="descuento" id="descuento" value="<?php echo $descuento; ?>">
+                                    <input class="campo" type="text" name="descuento" id="descuento" value="<?php echo $descuento; ?>">
                                 </div>
                             </div>
 
@@ -380,12 +380,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="campo-nombre">
                         <div class="nombre">
                             <label for="precio">Precio</label>
-                            <input class="campo" type="number" name="precio" id="precio" required> 
+                            <input class="campo" type="text" name="precio" id="precio" required> 
                         </div>
                         
                         <div class="apellidos">
                             <label for="descuento">Descuento</label>
-                            <input class="campo" type="number" name="descuento" id="descuento">
+                            <input class="campo" type="text" name="descuento" id="descuento">
                         </div>
                     </div>
 
