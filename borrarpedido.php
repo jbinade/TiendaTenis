@@ -208,7 +208,13 @@ if(isset($_REQUEST["estado"])) {
 
                         <div class="botones-form">
                             <button class="btn-registro" type="submit">Eliminar</button>
-                            <a class="btn-registro" href="pedidos.php">Cancelar</a>
+                            <?php 
+                                $rol = $_SESSION["rol"];
+                                if($rol == "usuario") { ?>
+                                    <a class="btn-registro" href="misPedidos.php">Cancelar</a>
+                            <?php } else { ?>
+                                    <a class="btn-registro" href="pedidos.php">Cancelar</a>
+                            <?php } ?>
                         </div>
                     </div>
                 </form>    
