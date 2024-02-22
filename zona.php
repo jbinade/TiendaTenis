@@ -15,7 +15,7 @@
 
         <aside class="asidedca">
             <div class="form-login">
-                <h3>Hola, <?php echo $nombreusuario?></h3>";
+                <h3>Hola, <?php echo $nombreusuario; ?></h3>
 
                 <div class="form-login enlaces-user">
                     <a href="miCuenta.php">Mi cuenta</a>

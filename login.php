@@ -1,4 +1,12 @@
+<?php
 
+if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) {
+    // Redirigir a index.php
+    header("Location: index.php");
+    exit; // Asegura que el script se detenga después de la redirección
+}
+
+?>
 
 
 <aside class="contenedor asidedca">
