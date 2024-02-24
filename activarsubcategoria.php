@@ -95,7 +95,7 @@ if(isset($_REQUEST["codigo"])) {
 
                 <form class="formulario" action="activarsubcategoria.php?codigo=<?php echo $codigo; ?>" method="post">
 
-                    <h2>Activar Categoría</h2>
+                    <h2>Activar Subcategoría</h2>
 
                     <div class="form-campos form-cambio-contraseña">
 

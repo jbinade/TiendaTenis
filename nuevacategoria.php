@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 
                             <div class="botones-form dni-empleado">
                                 <button class="btn-registro" type="submit">Enviar</button>
-                                <a class="btn-registro" href="index.php">Cancelar</a>
+                                <a class="btn-registro" href="categorias.php">Cancelar</a>
                             </div>
                         </div>
                     </form>
@@ -222,7 +222,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                     <div class="botones-form dni-empleado">
                         <button class="btn-registro" type="submit">Enviar</button>
-                        <a class="btn-registro" href="index.php">Cancelar</a>
+                        <a class="btn-registro" href="categorias.php">Cancelar</a>
                     </div>
                 </div>
             </form>

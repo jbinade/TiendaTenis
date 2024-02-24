@@ -111,7 +111,7 @@ include ('La-carta.php');
 
 ?>
                     <div class="botones-form">
-                        <a class="btn-registro" href="menuarticulos.php">Cancelar</a>
+                        <a class="btn-registro" href="categorias.php">Cancelar</a>
                     </div>
                 </div>
 

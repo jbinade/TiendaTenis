@@ -187,7 +187,7 @@ $conexion = $con->conectar_db();
                     <div class="botones-form">
                         <a class="btn-registro" href="estadopedido.php?pedido=<?php echo $resPedido->idPedido; ?>&estado=<?php echo $resPedido->estado; ?>">Actualizar Estado</a>
                         <a class="btn-registro" href="borrarpedido.php?pedido=<?php echo $resPedido->idPedido; ?>&estado=<?php echo $resPedido->estado; ?>">Cancelar Pedido</a>
-                        <a class="btn-registro" href="misPedidos.php">Volver a Mis Pedidos</a>
+                        <a class="btn-registro" href="pedidos.php">Volver a Pedidos</a>
                     </div>
 
                 </div>
