@@ -4,6 +4,9 @@ include("seguridad.php");
 
 include ('La-carta.php');
 
+$rol = $_SESSION["rol"];
+
+
 include("conectar_db.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

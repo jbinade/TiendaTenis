@@ -2,7 +2,8 @@
 
     include("seguridad.php");
     include 'La-carta.php';
-    
+
+ 
     $dni = $_SESSION["dni"];
 
 ?>

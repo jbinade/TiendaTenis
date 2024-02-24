@@ -2,6 +2,7 @@
 
     include("seguridad.php");
     include 'La-carta.php';
+
     $idPedido = $_REQUEST["id"]
 
 ?>

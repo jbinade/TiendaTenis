@@ -2,6 +2,9 @@
     session_start();
   include 'La-carta.php';
   $cart = new Cart;
+
+  $rol = $_SESSION["rol"];
+
 ?>
 
 <!DOCTYPE html>

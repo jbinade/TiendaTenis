@@ -4,6 +4,12 @@ include("seguridad.php");
 include ('La-carta.php');
 include("conectar_db.php");
 
+$rol = $_SESSION["rol"];
+
+if ($rol !== "usuario") {
+    header("Location: index.php");
+}
+
 if(isset($_REQUEST["pedido"])) {
     $idPedido = $_REQUEST["pedido"];
 

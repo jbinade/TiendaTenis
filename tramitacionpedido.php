@@ -2,8 +2,7 @@
 
     session_start();
     include 'La-carta.php';
-    
-    
+
     
     if (isset($_SESSION["rol"])) {
 

@@ -3,6 +3,12 @@
 include("seguridad.php");
 include ('La-carta.php');
 
+$rol = $_SESSION["rol"];
+
+if ($rol !== "usuario") {
+    header("Location: index.php");
+}
+
 ?>
 
 <!DOCTYPE html>

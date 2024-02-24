@@ -3,6 +3,14 @@
 include("seguridad.php");
 include ('La-carta.php');
 
+$rol = $_SESSION["rol"];
+
+$rol = $_SESSION["rol"];
+
+if ($rol !== "usuario") {
+    header("Location: index.php");
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include("conectar_db.php");
 
